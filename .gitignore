@@ -37,3 +37,11 @@ yarn-error.*
 *.tsbuildinfo
 
 app-example
+
+
+*.vscode
+.vscode-test
+*.vscode/*
+
+*.idea
+.idea/*
