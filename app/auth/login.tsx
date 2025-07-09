@@ -4,7 +4,7 @@ import { Colors } from "@/constants/Colors";
 import { Routes } from "@/constants/Routes";
 import { SharedStyles } from "@/constants/SharedStyles";
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { useState } from "react";
 import { ActivityIndicator, Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
@@ -49,7 +49,7 @@ export default function LoginScreen() {
                     />
 
                     {/* Sign In Button */}
-                    <TouchableOpacity style={SharedStyles.button}>
+                    <TouchableOpacity style={SharedStyles.button} onPress={() => { router.push(Routes.ASSESSMENTS.INDEX) }}>
                         <Text style={[SharedStyles.textLgExtrabold, styles.buttonText]}>Sign In</Text>
                         <AntDesign name="arrowright" size={20} color="#fff" />
                     </TouchableOpacity>
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         backgroundColor: Colors.light.background,
     },
-    logo: { width: 50, height: 50, marginTop: 80, marginBottom: 24, resizeMode: 'contain', borderRadius: 30, },
+    logo: { width: 50, height: 50, marginTop: 80, resizeMode: 'contain', borderRadius: 30, },
     buttonText: { color: "#fff", marginRight: 8 },
     socialRow: { flexDirection: "row", alignItems: "center", justifyContent: "center", width: 120, gap: 8 },
     socialIcon: { paddingVertical: 10, paddingHorizontal: 12, borderColor: Colors.light.borderColor, borderWidth: 1, borderRadius: 30 },
