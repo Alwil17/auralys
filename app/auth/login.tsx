@@ -1,12 +1,15 @@
 import CircleHeader from "@/components/ui/CircleHeader";
 import InputField from "@/components/ui/InputField";
 import { Colors } from "@/constants/Colors";
+import { Routes } from "@/constants/Routes";
 import { SharedStyles } from "@/constants/SharedStyles";
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
+import { Link } from "expo-router";
 import { useState } from "react";
-import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function LoginScreen() {
+    const [logoLoaded, setLogoLoaded] = useState(false);
     const [passwordVisible, setPasswordVisible] = useState(false);
 
     return (
@@ -15,7 +18,21 @@ export default function LoginScreen() {
             {/* Header avec logo */}
             <CircleHeader customStyles={styles.svgCurve} />
             {/* <View style={styles.header} /> */}
-            <Image source={require("../../assets/icons/ios-light.png")} style={styles.logo} />
+            <View>
+                {!logoLoaded && (
+                    <ActivityIndicator
+                        size="small"
+                        color={Colors.light.purple}
+                        style={styles.logoLoader}
+                    />
+                )}
+                <Image
+                    source={require("../../assets/icons/logo.png")}
+                    style={[styles.logo, { opacity: logoLoaded ? 1 : 0 }]}
+                    onLoad={() => setLogoLoaded(true)}
+                    fadeDuration={200}
+                />
+            </View>
 
             {/* Formulaire de connexion */}
             <View style={styles.formContainer}>
@@ -49,7 +66,7 @@ export default function LoginScreen() {
                 <View style={styles.footerContainer}>
                     {/* Links */}
                     <Text style={styles.footerText}>
-                        Don’t have an account? <Text style={SharedStyles.link}>Sign Up.</Text>
+                        Don’t have an account? <Link href={Routes.AUTH.REGISTER} style={SharedStyles.link}>Sign Up.</Link>
                     </Text>
                     <Text style={[SharedStyles.link, { marginTop: 8 }]}>Forgot Password</Text>
                 </View>
@@ -61,10 +78,10 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
     container: { flex: 1, backgroundColor: Colors.light.background, alignItems: "center", paddingHorizontal: 24 },
     formContainer: {
-        flex: 1, 
-        justifyContent: "flex-start", 
-        alignItems: "center", 
-        width: "100%", 
+        flex: 1,
+        justifyContent: "flex-start",
+        alignItems: "center",
+        width: "100%",
         marginTop: 40,
         gap: 30
     },
@@ -73,10 +90,17 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width,
         backgroundColor: Colors.light.purple, height: 0
     },
+    logoLoader: {
+        width: 50,
+        height: 50,
+        marginTop: 80,
+        borderRadius: 30,
+        backgroundColor: Colors.light.background,
+    },
     logo: { width: 50, height: 50, marginTop: 80, marginBottom: 24, resizeMode: 'contain', borderRadius: 30, },
     buttonText: { color: "#fff", marginRight: 8 },
     socialRow: { flexDirection: "row", alignItems: "center", justifyContent: "center", width: 120, gap: 8 },
-    socialIcon: { paddingVertical: 10, paddingHorizontal: 12 , borderColor: Colors.light.borderColor, borderWidth: 1, borderRadius: 30 },
+    socialIcon: { paddingVertical: 10, paddingHorizontal: 12, borderColor: Colors.light.borderColor, borderWidth: 1, borderRadius: 30 },
     footerText: { fontSize: 14, color: "#666" },
-    footerContainer: { flexDirection: "column", justifyContent: "center", alignItems: "center"  }
+    footerContainer: { flexDirection: "column", justifyContent: "center", alignItems: "center" }
 });
