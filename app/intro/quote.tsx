@@ -45,8 +45,7 @@ export default function QuoteScreen() {
                     animate={{ opacity: 1, translateY: 0 }}
                     transition={{
                         type: "timing",
-                        duration: 800,
-                        delay: 1000, // décalé après la citation
+                        duration: 300
                     }}
                 >
                     <Text style={styles.author}>— Mary Oliver, Wild Geese</Text>
@@ -58,8 +57,7 @@ export default function QuoteScreen() {
                 animate={{ opacity: 1, translateY: 0 }}
                 transition={{
                     type: "timing",
-                    duration: 800,
-                    delay: 1000, // décalé après la citation
+                    duration: 300
                 }}
             >
                 <TouchableOpacity style={styles.button} onPress={handleContinue}>
