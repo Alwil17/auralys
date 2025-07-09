@@ -1,15 +1,30 @@
 import { Colors } from "@/constants/Colors";
 import { AntDesign } from "@expo/vector-icons";
 import { Link } from "expo-router";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useState } from "react";
+import { ActivityIndicator, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function WelcomeScreen() {
+    const [logoLoaded, setLogoLoaded] = useState(false);
+    const [mascotLoaded, setMascotLoaded] = useState(false);
+
     return (
         <View style={styles.container}>
-            <Image
-                source={require("../../assets/icons/logo.png")}
-                style={styles.logoImage}
-            />
+            <View style={styles.imageContainer}>
+                {!logoLoaded && (
+                    <ActivityIndicator 
+                        size="small" 
+                        color={Colors.light.purple} 
+                        style={styles.logoLoader}
+                    />
+                )}
+                <Image
+                    source={require("../../assets/icons/logo.png")}
+                    style={[styles.logoImage, { opacity: logoLoaded ? 1 : 0 }]}
+                    onLoad={() => setLogoLoaded(true)}
+                    fadeDuration={200}
+                />
+            </View>
             <Text style={styles.base}>
                 Welcome to{' '}
                 <Text style={styles.brand}>Auralys</Text>
@@ -20,10 +35,22 @@ export default function WelcomeScreen() {
                 Your gentle AI companion for emotional balance and daily serenity 🌿
             </Text>
 
-            <Image
-                source={require("../../assets/images/luma.png")}
-                style={styles.mascotteImage}
-            />
+            <View style={styles.imageContainer}>
+                {!mascotLoaded && (
+                    <ActivityIndicator 
+                        size="large" 
+                        color={Colors.light.purple} 
+                        style={styles.mascotLoader}
+                    />
+                )}
+                <Image
+                    source={require("../../assets/images/luma.png")}
+                    style={[styles.mascotteImage, { opacity: mascotLoaded ? 1 : 0 }]}
+                    onLoad={() => setMascotLoaded(true)}
+                    fadeDuration={300}
+                    resizeMode="contain"
+                />
+            </View>
 
             <TouchableOpacity style={styles.button}>
                 <Text style={styles.buttonText}>Get Started</Text>
@@ -49,6 +76,21 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         gap: 30,
+    },
+    imageContainer: {
+        position: 'relative',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    logoLoader: {
+        position: 'absolute',
+        width: 50,
+        height: 50,
+    },
+    mascotLoader: {
+        position: 'absolute',
+        width: 300,
+        height: 300,
     },
     base: {
         fontSize: 28,
