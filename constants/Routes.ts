@@ -5,4 +5,8 @@ export const Routes = {
         QUOTE: '/intro/quote',
     },
     WELCOME: '/welcome',
+    AUTH: {
+        LOGIN: '/auth/login',
+        REGISTER: '/auth/register',
+    },
 };
