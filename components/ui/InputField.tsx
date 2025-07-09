@@ -7,6 +7,15 @@ type InputFieldProps = {
     label?: string;
 } & TextInputProps;
 
+/**
+ * InputField is a simple component that wraps a TextInput and provides
+ * a label and an icon. The label is rendered above the TextInput, and
+ * the icon is rendered inside the TextInput.
+ * @param icon The name of the icon from the Feather library.
+ * @param label The label to render above the TextInput.
+ * @param props Other props to pass to TextInput.
+ * @returns A View that contains the label, icon, and TextInput.
+ */
 export default function InputField({ icon, label, ...props }: InputFieldProps) {
     return (
         <View style={styles.container}>
@@ -14,7 +23,7 @@ export default function InputField({ icon, label, ...props }: InputFieldProps) {
             <View style={styles.inputWrapper}>
                 <Feather name={icon} size={20} color="#7D7D7D" />
                 <TextInput
-                    style={SharedStyles.textMdbold}
+                    style={[SharedStyles.textMdbold, {marginLeft: 8 }]}
                     placeholderTextColor="#999"
                     {...props}
                 />
@@ -40,4 +49,4 @@ const styles = StyleSheet.create({
         borderColor: '#eee',
         borderWidth: 1,
     }
-});
+}); 
