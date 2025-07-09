@@ -38,7 +38,7 @@ export default function RootLayout() {
       await SplashScreen.hideAsync();
       // Attendre un peu pour que le Stack soit monté
       setTimeout(() => {
-        router.push("/intro/loading");
+        router.push("/intro/quote");
       }, 100);
     }
   }, [appIsReady, router]);
@@ -53,6 +53,10 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="intro/loading" options={{ headerShown: false }} />
+        <Stack.Screen name="intro/quote" options={{ headerShown: false }} />
+        <Stack.Screen name="welcome/index" options={{ headerShown: false }} />
+        <Stack.Screen name="auth/login" options={{ headerShown: false }} />
+        <Stack.Screen name="auth/register" options={{ headerShown: false }} />
       </Stack>
     </View>
   );
