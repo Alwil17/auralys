@@ -1,6 +1,7 @@
 import { Colors } from "@/constants/Colors";
+import { Routes } from "@/constants/Routes";
 import { AntDesign } from "@expo/vector-icons";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { useState } from "react";
 import { ActivityIndicator, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
@@ -52,12 +53,12 @@ export default function WelcomeScreen() {
                 />
             </View>
 
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={() => router.push(Routes.AUTH.LOGIN)}>
                 <Text style={styles.buttonText}>Get Started</Text>
                 <AntDesign name="arrowright" size={20} color="#fff" />
             </TouchableOpacity>
 
-            <Link href="/auth/login" replace asChild>
+            <Link href={Routes.AUTH.LOGIN} replace asChild>
                 <Text>
                     Already have an account?{' '}
                     <Text style={{ color: Colors.light.blue, fontWeight: '600', textDecorationLine: 'underline' }}>
