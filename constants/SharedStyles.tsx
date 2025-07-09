@@ -20,6 +20,11 @@ export const SharedStyles = StyleSheet.create({
         fontWeight: 'bold',
         fontFamily: 'Urbanist-Bold',
     },
+    textSmbold: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        fontFamily: 'Urbanist-Bold',
+    },
     textLgExtrabold: {
         fontSize: 18,
         fontWeight: 'bold',
