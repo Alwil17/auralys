@@ -50,7 +50,7 @@ export default function RootLayout() {
 
   return (
     <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-      <Stack>
+      <Stack> 
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="intro/loading" options={{ headerShown: false }} />
         <Stack.Screen name="intro/quote" options={{ headerShown: false }} />
