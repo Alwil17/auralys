@@ -14,6 +14,7 @@ export default function Layout() {
                         <Stack.Screen name="index" />
                         <Stack.Screen name="step1" />
                         <Stack.Screen name="step2" />
+                        <Stack.Screen name="step4" />
                     </Stack>
             </SafeAreaView>
         </AssessmentProvider>
@@ -24,5 +25,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#FFF9F6",
+        marginTop: 30, // Remove top margin to avoid white space
     },
 });
