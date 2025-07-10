@@ -14,5 +14,6 @@ export const Routes = {
         STEP1: '/assessments/step1',
         STEP2: '/assessments/step2',
         STEP3: '/assessments/step3',
+        STEP4: '/assessments/step4',
     },
 };
