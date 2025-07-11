@@ -35,6 +35,11 @@ export const SharedStyles = StyleSheet.create({
         fontWeight: 'bold',
         fontFamily: 'Urbanist-ExtraBold',
     },
+    paragraphMd: {
+        fontSize: 16,
+        fontWeight: 'medium',
+        fontFamily: 'Urbanist-Medium',
+    },
     link: {
         color: Colors.light.blue,
         fontWeight: '600',
