@@ -30,6 +30,11 @@ export const SharedStyles = StyleSheet.create({
         fontWeight: 'bold',
         fontFamily: 'Urbanist-ExtraBold',
     },
+    text2XlExtrabold: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        fontFamily: 'Urbanist-ExtraBold',
+    },
     link: {
         color: Colors.light.blue,
         fontWeight: '600',
