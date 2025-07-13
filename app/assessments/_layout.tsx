@@ -1,12 +1,14 @@
 import { Stack } from "expo-router";
 import { SafeAreaView, StyleSheet } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { AssessmentProvider } from "../../contexts/AssessmentContext";
 
 export default function Layout() {
     return (
         <AssessmentProvider>
             <SafeAreaView style={styles.container}>
-                <Stack
+                <GestureHandlerRootView>
+                    <Stack
                         screenOptions={{
                             headerShown: false,
                         }}
@@ -19,6 +21,7 @@ export default function Layout() {
                         <Stack.Screen name="step5" />
                         <Stack.Screen name="step7" />
                     </Stack>
+                </GestureHandlerRootView>
             </SafeAreaView>
         </AssessmentProvider>
     );
