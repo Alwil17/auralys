@@ -25,7 +25,7 @@ export default function AgeScreen() {
 
   const handleContinue = () => {
     // Ici vous pouvez rediriger vers la prochaine question ou terminer l'assessment
-    router.push(Routes.ASSESSMENTS.STEP4);
+    router.push(Routes.ASSESSMENTS.STEP3);
   };
 
   const renderAgeItem = (age: number, index: number) => {
