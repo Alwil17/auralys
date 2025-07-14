@@ -20,10 +20,25 @@ export const SharedStyles = StyleSheet.create({
         fontWeight: 'bold',
         fontFamily: 'Urbanist-Bold',
     },
+    textSmbold: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        fontFamily: 'Urbanist-Bold',
+    },
     textLgExtrabold: {
         fontSize: 18,
         fontWeight: 'bold',
         fontFamily: 'Urbanist-ExtraBold',
+    },
+    text2XlExtrabold: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        fontFamily: 'Urbanist-ExtraBold',
+    },
+    paragraphMd: {
+        fontSize: 16,
+        fontWeight: 'medium',
+        fontFamily: 'Urbanist-Medium',
     },
     link: {
         color: Colors.light.blue,
