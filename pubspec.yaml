@@ -69,22 +69,22 @@ flutter:
   assets:
     - assets/images/
   fonts:
-    - family: urbanist
+    - family: Urbanist
       fonts:
-        - asset: assets\fonts\urbanist/Urbanist-ExtraLight.ttf
+        - asset: assets\fonts\Urbanist-ExtraLight.ttf
+          weight: 100
+        - asset: assets\fonts\Urbanist-Light.ttf
           weight: 200
-        - asset: assets\fonts\urbanist/Urbanist-Light.ttf
+        - asset: assets\fonts\Urbanist-Regular.ttf
           weight: 300
-        - asset: assets\fonts\urbanist/Urbanist-Regular.ttf
+        - asset: assets\fonts\Urbanist-Medium.ttf
           weight: 400
-        - asset: assets\fonts\urbanist/Urbanist-Medium.ttf
+        - asset: assets\fonts\Urbanist-SemiBold.ttf
           weight: 500
-        - asset: assets\fonts\urbanist/Urbanist-SemiBold.ttf
+        - asset: assets\fonts\Urbanist-Bold.ttf
           weight: 600
-        - asset: assets\fonts\urbanist/Urbanist-Bold.ttf
+        - asset: assets\fonts\Urbanist-ExtraBold.ttf
           weight: 700
-        - asset: assets\fonts\urbanist/Urbanist-ExtraBold.ttf
-          weight: 800
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
