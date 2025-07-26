@@ -69,6 +69,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/icons/
   fonts:
     - family: Urbanist
       fonts:
