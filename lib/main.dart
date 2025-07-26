@@ -64,8 +64,8 @@ class MyApp extends StatelessWidget {
         builder: (context, appStateProvider, child) {
       return MaterialApp.router(
         title: 'Auralys',
-        theme: lightTheme,
-        darkTheme: darkTheme,
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
         themeMode: appStateProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
         localizationsDelegates: [
           AppLocalizations.delegate,
