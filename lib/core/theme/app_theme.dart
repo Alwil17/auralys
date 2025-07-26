@@ -1,120 +1,159 @@
+import 'package:auralys/shared/app_colors.dart';
+import 'package:auralys/shared/app_sizes.dart';
 import 'package:flutter/material.dart';
 
-const defaultInputBorder = OutlineInputBorder(
-  borderRadius: BorderRadius.all(Radius.circular(16)),
-  borderSide: BorderSide(
-    color: AppColors.accent,
-    width: 1,
-  ),
-);
+class AppTheme {
+  // Light Theme data
+  static ThemeData lightTheme = ThemeData(
+    useMaterial3: true,
+    brightness: Brightness.light,
+    colorScheme: ColorScheme.light(
+      primary: AppColors.light.primary,
+      secondary: AppColors.light.secondary,
+      primaryContainer: AppColors.light.primaryContainer,
+      onPrimaryContainer: AppColors.light.onPrimaryContainer,
+      surface: AppColors.light.background,
+      onSurface: AppColors.light.onBackground,
+    ),
+    scaffoldBackgroundColor: AppColors.light.background,
+    fontFamily: 'Urbanist',
+    textTheme: TextTheme(
+      titleLarge: titleTheme.copyWith(color: AppColors.light.primary),
+      titleMedium: subtitleTheme,
+      titleSmall: titleSmallTheme,
+      bodySmall: smallTextTheme,
+      labelLarge: labelLarge,
+      labelMedium: labelMedium,
+      labelSmall: labelSmall,
+      displayMedium: displayMedium,
+      displaySmall: displaySmall,
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        foregroundColor: AppColors.light.primaryContainer,
+        backgroundColor: AppColors.light.primary,
+      ),
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        side: BorderSide(color: AppColors.light.onBackground),
+      ),
+    ),
+  );
 
-const errorInputBorder = OutlineInputBorder(
-  borderRadius: BorderRadius.all(Radius.circular(16)),
-  borderSide: BorderSide(
-    color: AppColors.error,
-    width: 1,
-  ),
-);
+  // Dark Theme data
+  static ThemeData darkTheme = ThemeData(
+    useMaterial3: true,
+    brightness: Brightness.dark,
+    colorScheme: ColorScheme.dark(
+      primary: AppColors.dark.primary,
+      secondary: AppColors.dark.secondary,
+      primaryContainer: AppColors.dark.primaryContainer,
+      onPrimaryContainer: AppColors.dark.onPrimaryContainer,
+      surface: AppColors.dark.background,
+      onSurface: AppColors.dark.onBackground,
+    ),
+    scaffoldBackgroundColor: AppColors.dark.background,
+    fontFamily: "Urbanist",
+    textTheme: TextTheme(
+      titleLarge: titleTheme,
+      titleMedium: subtitleTheme.copyWith(
+        color: AppColors.dark.onBackground,
+      ),
+      titleSmall: titleSmallTheme.copyWith(
+        color: AppColors.dark.onBackground,
+      ),
+      bodySmall: smallTextTheme.copyWith(
+        color: AppColors.dark.onPrimaryContainer,
+      ),
+      labelLarge: labelLarge.copyWith(
+        color: AppColors.dark.onPrimaryContainer,
+      ),
+      labelMedium: labelMedium.copyWith(color: AppColors.dark.onBackground),
+      labelSmall: labelSmall.copyWith(color: AppColors.dark.onBackground),
+      displayMedium: displayMedium.copyWith(
+        color: AppColors.dark.onBackground,
+      ),
+      displaySmall: displaySmall,
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        foregroundColor: AppColors.dark.onBackground,
+        backgroundColor: AppColors.dark.primary,
+      ),
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        side: BorderSide(width: 1.4, color: AppColors.dark.onBackground),
+      ),
+    ),
+  );
 
-// dark theme
-final darkTheme = ThemeData(
-  brightness: Brightness.dark,
-  scaffoldBackgroundColor: Colors.black12,
-  primaryColor: AppColors.accent,
-  hintColor: AppColors.secondaryAccent,
-  fontFamily: 'Urbanist',
-  textTheme: const TextTheme(
-    displayLarge: TextStyle(color: AppColors.primaryText, fontSize: 32, fontWeight: FontWeight.bold),
-    titleLarge:   TextStyle(color: AppColors.primaryText, fontSize: 20),
-    bodyLarge:    TextStyle(color: AppColors.primaryText, fontSize: 16),
-    bodyMedium:   TextStyle(color: AppColors.primaryText, fontSize: 14),
-  ),
-  bottomAppBarTheme: const BottomAppBarTheme(
-    color: AppColors.darkBackground,
-    elevation: 1,
-    shape: CircularNotchedRectangle(),
-  ),
-  buttonTheme: ButtonThemeData(
-    buttonColor: AppColors.accent,
-    textTheme: ButtonTextTheme.primary,
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-  ),
-  appBarTheme: const AppBarTheme(
-    color: Colors.black26,
-    iconTheme: IconThemeData(color: AppColors.primaryText),
-    titleTextStyle: TextStyle(color: AppColors.primaryText, fontSize: 20),
-  ),
-  floatingActionButtonTheme: const FloatingActionButtonThemeData(
-    backgroundColor: AppColors.accent,
-    foregroundColor: AppColors.primaryText,
-  ),
-  inputDecorationTheme: const InputDecorationTheme(
-    filled: true,
-    fillColor: Color(0xFF1E1E1E),
-    errorStyle: TextStyle(height: 0),
-    border: defaultInputBorder,
-    enabledBorder: defaultInputBorder,
-    focusedBorder: defaultInputBorder,
-    errorBorder: errorInputBorder,
-    labelStyle: TextStyle(color: Colors.white70, fontSize: 13),
-    hintStyle: TextStyle(color: Colors.white54),
-  ),
-);
-
-// light theme
-final lightTheme = ThemeData(
-  brightness: Brightness.light,
-  scaffoldBackgroundColor: AppColors.primaryBackground,
-  primaryColor: AppColors.accent,
-  hintColor: AppColors.secondaryAccent,
-  fontFamily: 'Urbanist',
-  textTheme: const TextTheme(
-    displayLarge: TextStyle(color: AppColors.secondaryBackground, fontSize: 32, fontWeight: FontWeight.bold),
-    titleLarge:   TextStyle(color: AppColors.secondaryBackground, fontSize: 20),
-    bodyLarge:    TextStyle(color: AppColors.secondaryBackground, fontSize: 16),
-    bodyMedium:   TextStyle(color: AppColors.secondaryBackground, fontSize: 14),
-  ),
-  buttonTheme: ButtonThemeData(
-    buttonColor: AppColors.accent,
-    textTheme: ButtonTextTheme.primary,
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-  ),
-  appBarTheme: const AppBarTheme(
-    color: Colors.white,
-    iconTheme: IconThemeData(color: AppColors.primaryText),
-    titleTextStyle: TextStyle(color: AppColors.darkBackground, fontSize: 20),
-  ),
-  bottomAppBarTheme: const BottomAppBarTheme(
-    color: Colors.white,
-    elevation: 1,
-    shape: CircularNotchedRectangle(),
-  ),
-  floatingActionButtonTheme: const FloatingActionButtonThemeData(
-    backgroundColor: AppColors.accent,
-    foregroundColor: AppColors.primaryText,
-  ),
-  inputDecorationTheme: const InputDecorationTheme(
-    filled: true,
-    fillColor: Colors.white,
-    errorStyle: TextStyle(height: 0),
-    border: defaultInputBorder,
-    enabledBorder: defaultInputBorder,
-    focusedBorder: defaultInputBorder,
-    errorBorder: errorInputBorder,
-    labelStyle: TextStyle(color: Color(0xff3A3A3B), fontSize: 13),
-    hintStyle: TextStyle(color: Colors.grey),
-  ),
-);
-
-class AppColors {
-  static const Color primaryBackground = Color(0xFFFFFFFF);
-  static const Color secondaryBackground = Color(0xFF2C3E50);
-  static const Color primaryText = Color(0xFFF5F5F5);
-  static const Color accent = Color(0xFFFABE17);
-  static const Color success = Color(0xFF4CAF50);
-  static const Color error = Color(0xFFF44336);
-  static const Color secondaryAccent = Color(0xFF7E57C2);
-  static const Color vectorsBackground = Color(0xFFBB86FC);
-  static const Color darkBackground = Color(0xFF171712);
-  static const Color blueColor = Colors.blue;
+  // Text Styles
+  static const TextStyle titleTheme = TextStyle(
+    fontWeight: FontWeight.w800,
+    fontSize: AppSizes.title,
+  );
+  static TextStyle titleSmallTheme = TextStyle(
+    color: AppColors.light.primary,
+    fontWeight: FontWeight.w800,
+    fontSize: AppSizes.titleSmall,
+  );
+  static TextStyle subtitleTheme = TextStyle(
+    color: AppColors.light.onPrimaryContainer,
+    fontWeight: FontWeight.w500,
+    fontSize: AppSizes.subTitle,
+  );
+  static TextStyle displayMedium = TextStyle(
+    color: AppColors.light.primary,
+    fontWeight: FontWeight.w700,
+    fontSize: AppSizes.displayMedium,
+  );
+  static TextStyle displaySmall = TextStyle(
+    color: AppColors.light.primaryContainer,
+    fontWeight: FontWeight.w700,
+    fontSize: AppSizes.buttonText,
+  );
+  static TextStyle smallTextTheme = TextStyle(
+    color: AppColors.light.onPrimaryContainer,
+    fontWeight: FontWeight.w700,
+    fontSize: AppSizes.smallText,
+  );
+  static TextStyle labelLarge = TextStyle(
+    color: AppColors.light.onPrimaryContainer,
+    fontWeight: FontWeight.w700,
+    fontSize: AppSizes.subTitle - 1,
+  );
+  static TextStyle labelMedium = TextStyle(
+    color: AppColors.light.onBackground,
+    fontWeight: FontWeight.w700,
+    fontSize: AppSizes.smallText2,
+  );
+  static TextStyle labelSmall = TextStyle(
+    color: AppColors.light.onBackground,
+    fontWeight: FontWeight.w800,
+    fontSize: AppSizes.smallText,
+  );
+  static ButtonStyle outlinedButtonStyle = OutlinedButton.styleFrom(
+    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+  );
+  static ButtonStyle circularOutlinedButtonStyle = outlinedButtonStyle.copyWith(
+    padding: WidgetStateProperty.all(
+      const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+    ),
+  );
+  static ButtonStyle elevatedButtonStyle = ElevatedButton.styleFrom(
+    padding: const EdgeInsets.symmetric(
+      vertical: AppSizes.padding,
+      horizontal: AppSizes.doublePadding,
+    ),
+  );
+  static ButtonStyle circularElevatedButtonStyle = elevatedButtonStyle.copyWith(
+    padding: WidgetStateProperty.all(
+      const EdgeInsets.symmetric(
+        vertical: AppSizes.doublePadding,
+        horizontal: AppSizes.doublePadding,
+      ),
+    ),
+  );
 }
