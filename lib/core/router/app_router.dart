@@ -1,4 +1,5 @@
 import 'package:auralys/core/router/routes.dart';
+import 'package:auralys/features/intro/screens/splash_screen.dart';
 import 'package:auralys/shared/error_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -6,12 +7,12 @@ class AppRouter {
   late final GoRouter _goRouter = GoRouter(
     initialLocation: APP_PAGES.splash.toPath,
     routes: <GoRoute>[
-      /* GoRoute(
+      GoRoute(
         path: APP_PAGES.splash.toPath,
         name: APP_PAGES.splash.toName,
         builder: (context, state) => SplashScreen(),
       ),
-      GoRoute(
+      /* GoRoute(
         path: APP_PAGES.welcome.toPath,
         name: APP_PAGES.welcome.toName,
         builder: (context, state) => WelcomeScreen(),
