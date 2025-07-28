@@ -22,7 +22,7 @@ class _DarkColors {
 class _LightColors {
   const _LightColors();
 
-  Color get background => const Color(0xFFFAF4FF);
+  Color get background => const Color(0xFFFFFAF4);
   Color get onBackground => const Color(0xFF4F3422);
   Color get onPrimaryContainer => const Color(0xFF736B66);
   Color get primary => const Color(0xFF4F3422);
