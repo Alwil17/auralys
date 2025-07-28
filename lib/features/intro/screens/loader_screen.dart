@@ -1,4 +1,6 @@
+import 'package:auralys/core/router/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class LoaderScreen extends StatefulWidget {
   const LoaderScreen({super.key});
@@ -17,6 +19,7 @@ class _LoaderScreenState extends State<LoaderScreen>
   late Animation<double> _progressAnimation;
   late List<Animation<double>> _circleOpacityAnimations;
   late List<Animation<double>> _circleScaleAnimations;
+  bool _hasNavigated = false;
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +75,7 @@ class _LoaderScreenState extends State<LoaderScreen>
 
   @override
   void dispose() {
+    debugPrint('LoaderScreen: Disposing controllers');
     _progressController.dispose();
     _circleController.dispose();
     super.dispose();
@@ -87,13 +91,9 @@ class _LoaderScreenState extends State<LoaderScreen>
       vsync: this,
     );
 
-    _progressAnimation = Tween<double>(
-      begin: 0.0,
-      end: 100.0,
-    ).animate(CurvedAnimation(
-      parent: _progressController,
-      curve: Curves.easeOut,
-    ));
+    _progressAnimation = Tween<double>(begin: 0.0, end: 100.0).animate(
+      CurvedAnimation(parent: _progressController, curve: Curves.easeOut),
+    );
 
     // Circle animation (repeating every 2 seconds)
     _circleController = AnimationController(
@@ -103,31 +103,41 @@ class _LoaderScreenState extends State<LoaderScreen>
 
     // Create animations for each of the 3 circles with staggered delays
     _circleOpacityAnimations = List.generate(3, (index) {
-      return Tween<double>(
-        begin: 0.7,
-        end: 0.0,
-      ).animate(CurvedAnimation(
-        parent: _circleController,
-        curve: Interval(
-          index * 0.2, // Stagger delay (0, 0.2, 0.4)
-          1.0,
-          curve: Curves.easeInOut,
+      return Tween<double>(begin: 0.7, end: 0.0).animate(
+        CurvedAnimation(
+          parent: _circleController,
+          curve: Interval(
+            index * 0.2, // Stagger delay (0, 0.2, 0.4)
+            1.0,
+            curve: Curves.easeInOut,
+          ),
         ),
-      ));
+      );
     });
 
     _circleScaleAnimations = List.generate(3, (index) {
-      return Tween<double>(
-        begin: 1.0,
-        end: 4.0,
-      ).animate(CurvedAnimation(
-        parent: _circleController,
-        curve: Interval(
-          index * 0.2, // Stagger delay (0, 0.2, 0.4)
-          1.0,
-          curve: Curves.easeInOut,
+      return Tween<double>(begin: 1.0, end: 4.0).animate(
+        CurvedAnimation(
+          parent: _circleController,
+          curve: Interval(
+            index * 0.2, // Stagger delay (0, 0.2, 0.4)
+            1.0,
+            curve: Curves.easeInOut,
+          ),
         ),
-      ));
+      );
+    });
+
+    // Add listener to navigate when progress completes
+    _progressController.addStatusListener((status) {
+      if (status == AnimationStatus.completed && !_hasNavigated) {
+        _hasNavigated = true;
+        debugPrint('LoaderScreen: Navigation to quote screen');
+        if (mounted) {
+          _progressController.stop();
+          context.pushReplacementNamed(APP_PAGES.quote.toName);
+        }
+      }
     });
 
     // Start animations
