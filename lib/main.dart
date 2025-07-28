@@ -7,10 +7,16 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(
+        create: (_) => AppStateProvider(prefs)..loadPreferences()),
+  ], child: MyApp()));
   configLoading();
 }
 
