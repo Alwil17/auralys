@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../core/router/routes.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(const Duration(seconds: 3), () {
+      // Navigate to the loader screen after the splash screen
+      context.pushNamed(APP_PAGES.loader.toName);
+    });
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Center(
