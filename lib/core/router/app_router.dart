@@ -1,5 +1,6 @@
 import 'package:auralys/core/router/routes.dart';
 import 'package:auralys/features/intro/screens/loader_screen.dart';
+import 'package:auralys/features/intro/screens/quote_screen.dart';
 import 'package:auralys/features/intro/screens/splash_screen.dart';
 import 'package:auralys/shared/error_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -17,6 +18,11 @@ class AppRouter {
             path: APP_PAGES.loader.toPath,
             name: APP_PAGES.loader.toName,
             builder: (context, state) => LoaderScreen(),
+          ),
+          GoRoute(
+            path: APP_PAGES.quote.toPath,
+            name: APP_PAGES.quote.toName,
+            builder: (context, state) => QuoteScreen(),
           )
         ]
       ),
