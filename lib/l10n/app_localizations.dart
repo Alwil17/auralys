@@ -98,16 +98,16 @@ abstract class AppLocalizations {
     Locale('fr'),
   ];
 
-  /// App Name label.
+  /// No description provided for @welcomeTo.
   ///
   /// In fr, this message translates to:
-  /// **'Bienvenue sur \n{appName}'**
-  String welcomeTo(String appName);
+  /// **'Bienvenue sur '**
+  String get welcomeTo;
 
   /// No description provided for @appSlogan.
   ///
   /// In fr, this message translates to:
-  /// **'Votre avis compte. \nNotez bien, vivez bien !'**
+  /// **'Votre compagnon IA pour l\'équilibre émotionnel et la sérénité au quotidien 🌿'**
   String get appSlogan;
 
   /// No description provided for @getStarted.

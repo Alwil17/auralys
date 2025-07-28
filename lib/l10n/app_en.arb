@@ -1,15 +1,6 @@
 {
-  "welcomeTo": "Welcome to \n{appName}",
-  "@welcomeTo": {
-    "description": "App Name label.",
-    "placeholders": {
-      "appName": {
-        "type": "String",
-        "example": "Auralys"
-      }
-    }
-  },
-  "appSlogan": "Your opinion matters, \nRate smarter, Live better !",
+  "welcomeTo": "Welcome to ",
+  "appSlogan": "Your gentle AI companion for emotional balance and daily serenity 🌿",
   "getStarted": "Get Started",
   "logIn": "LogIn",
   "loginNow": "Log in",

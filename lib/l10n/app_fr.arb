@@ -1,15 +1,6 @@
 {
-  "welcomeTo": "Bienvenue sur \n{appName}",
-  "@welcomeTo": {
-    "description": "App Name label.",
-    "placeholders": {
-      "appName": {
-        "type": "String",
-        "example": "Auralys"
-      }
-    }
-  },
-  "appSlogan": "Votre avis compte. \nNotez bien, vivez bien !",
+  "welcomeTo": "Bienvenue sur ",
+  "appSlogan": "Votre compagnon IA pour l'équilibre émotionnel et la sérénité au quotidien 🌿",
   "getStarted": "Rejoindre l'aventure",
   "logIn": "Connexion",
   "loginNow": "Se connecter",
