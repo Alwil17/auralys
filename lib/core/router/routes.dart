@@ -4,10 +4,10 @@ abstract class Routes {
   static const String splash = "/";
   static const String loader = "/loader";
   static const String quote = "/quote";
+  static const String welcome = "/welcome";
   static const String login = "/login";
   static const String register = "/register";
   static const String home = "/home";
-  static const String welcome = "/welcome";
 }
 
 extension AppPageExtension on APP_PAGES {
@@ -21,14 +21,14 @@ extension AppPageExtension on APP_PAGES {
         return Routes.loader;
       case APP_PAGES.quote:
         return Routes.quote;
+      case APP_PAGES.welcome:
+        return Routes.welcome;
       case APP_PAGES.login:
         return Routes.login;
       case APP_PAGES.register:
         return Routes.register;
       case APP_PAGES.home:
         return Routes.home;
-      case APP_PAGES.welcome:
-        return Routes.welcome;
     }
   }
 }

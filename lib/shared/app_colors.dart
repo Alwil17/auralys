@@ -16,6 +16,7 @@ class _DarkColors {
   Color get onPrimaryContainer => const Color(0xFFC9C7C5);
   Color get primary => const Color(0xFF926247);
   Color get primaryContainer => const Color(0xFF372315);
+  Color get purple => const Color(0xFFE876DB);
   Color get secondary => const Color(0xFF9db068);
 }
 
@@ -27,5 +28,6 @@ class _LightColors {
   Color get onPrimaryContainer => const Color(0xFF736B66);
   Color get primary => const Color(0xFF4F3422);
   Color get primaryContainer => const Color(0xFFFFFFFF);
+  Color get purple => const Color(0xFFE876DB);
   Color get secondary => const Color(0xFF9db068);
 }

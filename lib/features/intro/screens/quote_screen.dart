@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:auralys/core/router/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class QuoteScreen extends StatefulWidget {
   const QuoteScreen({super.key});
@@ -183,7 +185,6 @@ class _QuoteScreenState extends State<QuoteScreen>
       debugPrint('Fade animation status: $status');
       if (status == AnimationStatus.completed) {
         debugPrint("Fade animation completed");
-        _fadeController.stop();
       }
     });
 
@@ -193,7 +194,7 @@ class _QuoteScreenState extends State<QuoteScreen>
   void _handleContinue() {
     debugPrint('QuoteScreen: Continue button pressed');
     // Navigate to welcome screen using GoRouter
-    // context.go('/welcome');
+   context.goNamed(APP_PAGES.welcome.toName);
   }
 
   void _startTypewriterEffect() {

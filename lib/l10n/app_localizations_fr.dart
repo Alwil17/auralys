@@ -9,12 +9,11 @@ class AppLocalizationsFr extends AppLocalizations {
   AppLocalizationsFr([String locale = 'fr']) : super(locale);
 
   @override
-  String welcomeTo(String appName) {
-    return 'Bienvenue sur \n$appName';
-  }
+  String get welcomeTo => 'Bienvenue sur ';
 
   @override
-  String get appSlogan => 'Votre avis compte. \nNotez bien, vivez bien !';
+  String get appSlogan =>
+      'Votre compagnon IA pour l\'équilibre émotionnel et la sérénité au quotidien 🌿';
 
   @override
   String get getStarted => 'Rejoindre l\'aventure';

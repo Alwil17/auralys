@@ -2,6 +2,7 @@ import 'package:auralys/core/router/routes.dart';
 import 'package:auralys/features/intro/screens/loader_screen.dart';
 import 'package:auralys/features/intro/screens/quote_screen.dart';
 import 'package:auralys/features/intro/screens/splash_screen.dart';
+import 'package:auralys/features/onboarding/screens/welcome_screen.dart';
 import 'package:auralys/shared/error_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -26,11 +27,11 @@ class AppRouter {
           )
         ]
       ),
-      /* GoRoute(
+      GoRoute(
         path: APP_PAGES.welcome.toPath,
         name: APP_PAGES.welcome.toName,
         builder: (context, state) => WelcomeScreen(),
-      ) */
+      )
     ],
     debugLogDiagnostics: true,
     errorBuilder: (context, state) => ErrorScreen(error: state.error),
