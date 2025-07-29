@@ -2,18 +2,20 @@ import 'package:auralys/shared/app_colors.dart';
 import 'package:auralys/shared/app_sizes.dart';
 import 'package:flutter/material.dart';
 
+@immutable
 class AppTheme {
   // Light Theme data
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
     colorScheme: ColorScheme.light(
-      primary: AppColors.light.primary,
+      primary: AppColors.light.purple, // Utilise le purple comme couleur principale
       secondary: AppColors.light.secondary,
       primaryContainer: AppColors.light.primaryContainer,
       onPrimaryContainer: AppColors.light.onPrimaryContainer,
       surface: AppColors.light.background,
       onSurface: AppColors.light.onBackground,
+      tertiary: AppColors.light.primary, // Garde l'ancienne couleur primaire comme tertiaire
     ),
     scaffoldBackgroundColor: AppColors.light.background,
     fontFamily: 'Urbanist',
@@ -30,8 +32,8 @@ class AppTheme {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        foregroundColor: AppColors.light.primaryContainer,
-        backgroundColor: AppColors.light.primary,
+        foregroundColor: Colors.white,
+        backgroundColor: AppColors.light.purple, // Utilise purple pour les boutons
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
@@ -46,12 +48,13 @@ class AppTheme {
     useMaterial3: true,
     brightness: Brightness.dark,
     colorScheme: ColorScheme.dark(
-      primary: AppColors.dark.primary,
+      primary: AppColors.dark.purple, // Utilise le purple pour le dark mode aussi
       secondary: AppColors.dark.secondary,
       primaryContainer: AppColors.dark.primaryContainer,
       onPrimaryContainer: AppColors.dark.onPrimaryContainer,
       surface: AppColors.dark.background,
       onSurface: AppColors.dark.onBackground,
+      tertiary: AppColors.dark.primary,
     ),
     scaffoldBackgroundColor: AppColors.dark.background,
     fontFamily: "Urbanist",
@@ -78,8 +81,8 @@ class AppTheme {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        foregroundColor: AppColors.dark.onBackground,
-        backgroundColor: AppColors.dark.primary,
+        foregroundColor: Colors.white,
+        backgroundColor: AppColors.dark.purple,
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
