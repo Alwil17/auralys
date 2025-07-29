@@ -1,4 +1,5 @@
 import 'package:auralys/core/router/routes.dart';
+import 'package:auralys/features/assessments/screens/assessment_screen.dart';
 import 'package:auralys/features/auth/screens/forgot_password_screen.dart';
 import 'package:auralys/features/auth/screens/login_screen.dart';
 import 'package:auralys/features/auth/screens/register_screen.dart';
@@ -51,6 +52,11 @@ class AppRouter {
         path: APP_PAGES.register.toPath,
         name: APP_PAGES.register.toName,
         builder: (context, state) => RegisterScreen(),
+      ),
+      GoRoute(
+        path: APP_PAGES.assessments.toPath,
+        name: APP_PAGES.assessments.toName,
+        builder: (context, state) => AssessmentScreen(),
       ),
     ],
     debugLogDiagnostics: true,
