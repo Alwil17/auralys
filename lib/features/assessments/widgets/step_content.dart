@@ -1,55 +1,58 @@
+import 'package:auralys/features/assessments/widgets/steps/age_step.dart';
+import 'package:auralys/features/assessments/widgets/steps/gender_step.dart';
+import 'package:auralys/features/assessments/widgets/steps/mood_step.dart';
 import 'package:flutter/material.dart';
 
 class StepContent extends StatelessWidget {
   final int stepIndex;
-  
-  const StepContent({
-    super.key,
-    required this.stepIndex,
-  });
+
+  const StepContent({super.key, required this.stepIndex});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    
+
     return Center(
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
             children: [
-              ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 600),
-                child: Text(
-                  textAlign: TextAlign.center,
-                  _getStepTitle(stepIndex),
-                  style: theme.textTheme.titleLarge?.copyWith(
-                    fontSize: 28,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-              ),
-              
-              if (_hasSubtitle(stepIndex)) ...[
-                const SizedBox(height: 16),
+              // Only show title and subtitle for non-special layout steps
+              if (![2].contains(stepIndex)) ...[
                 ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 600),
                   child: Text(
                     textAlign: TextAlign.center,
-                    _getStepSubtitle(stepIndex),
-                    style: theme.textTheme.titleMedium?.copyWith(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      color: theme.colorScheme.onPrimaryContainer,
+                    _getStepTitle(stepIndex),
+                    style: theme.textTheme.titleLarge?.copyWith(
+                      fontSize: 28,
+                      fontWeight: FontWeight.w800,
                     ),
                   ),
                 ),
+
+                if (_hasSubtitle(stepIndex)) ...[
+                  const SizedBox(height: 16),
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 600),
+                    child: Text(
+                      textAlign: TextAlign.center,
+                      _getStepSubtitle(stepIndex),
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: theme.colorScheme.onPrimaryContainer,
+                      ),
+                    ),
+                  ),
+                ],
+
+                const SizedBox(height: 40),
               ],
-              
-              const SizedBox(height: 40),
-              
-              _getStepWidget(stepIndex),
-              
+
+              _getStepWidget(context, stepIndex),
+
               const SizedBox(height: 40),
             ],
           ),
@@ -74,10 +77,7 @@ class StepContent extends StatelessWidget {
               child: Text(
                 'Final Questions\n(Goals, Preferences, etc.)',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey,
-                ),
+                style: TextStyle(fontSize: 16, color: Colors.grey),
               ),
             ),
           ),
@@ -102,10 +102,7 @@ class StepContent extends StatelessWidget {
               child: Text(
                 'Daily Habits Questionnaire\n(Exercise, Social activities, etc.)',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey,
-                ),
+                style: TextStyle(fontSize: 16, color: Colors.grey),
               ),
             ),
           ),
@@ -130,10 +127,7 @@ class StepContent extends StatelessWidget {
               child: Text(
                 'Mood Selection\n(Emoji wheel or mood cards)',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey,
-                ),
+                style: TextStyle(fontSize: 16, color: Colors.grey),
               ),
             ),
           ),
@@ -156,12 +150,9 @@ class StepContent extends StatelessWidget {
             ),
             child: const Center(
               child: Text(
-                'Personal Information Form\n(Age, Gender, etc.)',
+                'Personal Information Form\n(Gender, etc.)',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey,
-                ),
+                style: TextStyle(fontSize: 16, color: Colors.grey),
               ),
             ),
           ),
@@ -182,10 +173,7 @@ class StepContent extends StatelessWidget {
         child: Text(
           'Assessment Step $step\nContent goes here',
           textAlign: TextAlign.center,
-          style: const TextStyle(
-            fontSize: 16,
-            color: Colors.grey,
-          ),
+          style: const TextStyle(fontSize: 16, color: Colors.grey),
         ),
       ),
     );
@@ -207,43 +195,8 @@ class StepContent extends StatelessWidget {
               child: Text(
                 'Sleep Assessment\n(Hours, Quality, Patterns)',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey,
-                ),
+                style: TextStyle(fontSize: 16, color: Colors.grey),
               ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildWelcomeStep() {
-    return Container(
-      constraints: const BoxConstraints(maxWidth: 400),
-      child: Column(
-        children: [
-          Container(
-            width: 150,
-            height: 150,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.purple.withOpacity(0.1),
-            ),
-            child: const Icon(
-              Icons.psychology,
-              size: 80,
-              color: Colors.purple,
-            ),
-          ),
-          const SizedBox(height: 30),
-          const Text(
-            'Ready to begin your journey towards better emotional wellness?',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
             ),
           ),
         ],
@@ -254,11 +207,11 @@ class StepContent extends StatelessWidget {
   String _getStepSubtitle(int step) {
     switch (step) {
       case 1:
-        return 'This assessment will help us understand your emotional well-being and create a personalized experience for you.';
+        return 'This helps us provide more personalized recommendations for your emotional wellness journey.';
       case 2:
-        return 'Help us get to know you better so we can provide personalized recommendations.';
+        return 'Please select your age to help us personalize your experience.';
       case 3:
-        return 'Share your current emotional state with us.';
+        return 'Select the emoji that best represents your current mood.';
       case 4:
         return 'Tell us about your daily routines and activities.';
       case 5:
@@ -273,11 +226,11 @@ class StepContent extends StatelessWidget {
   String _getStepTitle(int step) {
     switch (step) {
       case 1:
-        return 'Welcome to Your Assessment';
+        return "What's your official gender?";
       case 2:
-        return 'Tell Us About Yourself';
+        return 'How old are you?';
       case 3:
-        return 'How Are You Feeling?';
+        return 'How are you feeling today?';
       case 4:
         return 'Your Daily Habits';
       case 5:
@@ -289,14 +242,44 @@ class StepContent extends StatelessWidget {
     }
   }
 
-  Widget _getStepWidget(int step) {
+  Widget _getStepWidget(BuildContext context, int step) {
     switch (step) {
       case 1:
-        return _buildWelcomeStep();
+        return const GenderStep();
       case 2:
-        return _buildPersonalInfoStep();
+        return Column(
+          children: [
+            // Title and subtitle for age step positioned above the widget
+            ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 600),
+              child: Text(
+                textAlign: TextAlign.center,
+                _getStepTitle(step),
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontSize: 28,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 600),
+              child: Text(
+                textAlign: TextAlign.center,
+                _getStepSubtitle(step),
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                ),
+              ),
+            ),
+            const SizedBox(height: 40),
+            const AgeStep(),
+          ],
+        );
       case 3:
-        return _buildMoodStep();
+        return const MoodStep();
       case 4:
         return _buildHabitsStep();
       case 5:
@@ -309,6 +292,6 @@ class StepContent extends StatelessWidget {
   }
 
   bool _hasSubtitle(int step) {
-    return ![].contains(step); // All steps have subtitles for now
+    return ![2].contains(step); // Age step doesn't need subtitle since it's visually clear
   }
 }
