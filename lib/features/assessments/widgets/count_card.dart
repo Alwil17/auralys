@@ -14,27 +14,24 @@ class CountCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 12,
+        vertical: 6,
+      ),
+      decoration: BoxDecoration(
+        color: theme.colorScheme.primaryContainer,
+        borderRadius: BorderRadius.circular(30),
+        border: Border.all(
+          color: theme.colorScheme.primary.withOpacity(0.2),
         ),
-        elevation: 0,
-        color: theme.colorScheme.primary.withOpacity(0.1),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 12,
-            vertical: 6,
-          ),
-          child: Text(
-            '$count of $total',
-            style: theme.textTheme.labelMedium?.copyWith(
-              color: Colors.black,
-              fontSize: 14,
-              fontWeight: FontWeight.w800,
-            ),
-          ),
+      ),
+      child: Text(
+        '$count of $total',
+        style: theme.textTheme.labelMedium?.copyWith(
+          color: theme.colorScheme.onPrimaryContainer,
+          fontSize: 14,
+          fontWeight: FontWeight.w600,
         ),
       ),
     );
