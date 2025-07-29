@@ -1,4 +1,7 @@
 import 'package:auralys/core/router/routes.dart';
+import 'package:auralys/features/auth/screens/forgot_password_screen.dart';
+import 'package:auralys/features/auth/screens/login_screen.dart';
+import 'package:auralys/features/auth/screens/register_screen.dart';
 import 'package:auralys/features/intro/screens/loader_screen.dart';
 import 'package:auralys/features/intro/screens/quote_screen.dart';
 import 'package:auralys/features/intro/screens/splash_screen.dart';
@@ -31,7 +34,24 @@ class AppRouter {
         path: APP_PAGES.welcome.toPath,
         name: APP_PAGES.welcome.toName,
         builder: (context, state) => WelcomeScreen(),
-      )
+      ),
+      GoRoute(
+        path: APP_PAGES.login.toPath,
+        name: APP_PAGES.login.toName,
+        builder: (context, state) => LoginScreen(),
+        routes: [
+          GoRoute(
+            path: APP_PAGES.forgotPassword.toPath,
+            name: APP_PAGES.forgotPassword.toName,
+            builder: (context, state) => ForgotPasswordScreen(),
+          )
+        ]
+      ), 
+      GoRoute(
+        path: APP_PAGES.register.toPath,
+        name: APP_PAGES.register.toName,
+        builder: (context, state) => RegisterScreen(),
+      ),
     ],
     debugLogDiagnostics: true,
     errorBuilder: (context, state) => ErrorScreen(error: state.error),

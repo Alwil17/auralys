@@ -1,4 +1,4 @@
-enum APP_PAGES { splash, loader, quote, login, register, home, welcome }
+enum APP_PAGES { splash, loader, quote, login, forgotPassword, register, home, welcome }
 
 abstract class Routes {
   static const String splash = "/";
@@ -6,6 +6,7 @@ abstract class Routes {
   static const String quote = "/quote";
   static const String welcome = "/welcome";
   static const String login = "/login";
+  static const String forgotPassword = "/forgotPassword";
   static const String register = "/register";
   static const String home = "/home";
 }
@@ -25,6 +26,8 @@ extension AppPageExtension on APP_PAGES {
         return Routes.welcome;
       case APP_PAGES.login:
         return Routes.login;
+      case APP_PAGES.forgotPassword:
+        return Routes.forgotPassword;
       case APP_PAGES.register:
         return Routes.register;
       case APP_PAGES.home:
