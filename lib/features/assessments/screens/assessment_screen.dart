@@ -68,39 +68,41 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                // Special buttons for specific steps
+                // Skip button for gender step
                 if (_currentStep == 1) ...[
-                  // Skip button for welcome step
                   Container(
-                    margin: const EdgeInsets.only(bottom: 8),
+                    margin: const EdgeInsets.only(bottom: 16),
                     child: OutlinedButton(
-                      onPressed: () => _goToStep(_totalSteps),
+                      onPressed: () => _goToNextStep(),
                       style: OutlinedButton.styleFrom(
-                        side: BorderSide(color: theme.colorScheme.primary),
+                        backgroundColor: theme.colorScheme.secondary.withOpacity(0.1),
+                        side: BorderSide(color: theme.colorScheme.secondary),
                         padding: const EdgeInsets.symmetric(
                           vertical: 14,
                           horizontal: 32,
                         ),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(28),
+                          borderRadius: BorderRadius.circular(25),
                         ),
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Skip Assessment',
+                            'Prefer to skip, thanks',
                             style: TextStyle(
                               fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: theme.colorScheme.primary,
+                              fontWeight: FontWeight.w500,
+                              color: theme.colorScheme.secondary,
                             ),
                           ),
                           const SizedBox(width: 8),
-                          Icon(
-                            Icons.skip_next,
-                            size: 20,
-                            color: theme.colorScheme.primary,
+                          Text(
+                            '✕',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: theme.colorScheme.secondary,
+                            ),
                           ),
                         ],
                       ),
@@ -110,7 +112,9 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                 
                 // Main continue/finish button
                 PrimaryButton(
-                  text: _currentStep == _totalSteps ? 'Complete Assessment' : 'Continue',
+                  text: _currentStep == _totalSteps 
+                      ? 'Complete Assessment' 
+                      : 'Continue →',
                   onPressed: _handleContinue,
                   margin: EdgeInsets.zero,
                 ),
