@@ -1,6 +1,9 @@
+import 'package:auralys/core/router/routes.dart';
 import 'package:auralys/l10n/app_localizations.dart';
+import 'package:auralys/shared/app_assets.dart';
 import 'package:auralys/shared/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -42,7 +45,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       duration: const Duration(milliseconds: 200),
                       child: ClipOval(
                         child: Image.asset(
-                          'assets/icons/logo.png',
+                          AppAssets.logo,
                           width: 50,
                           height: 50,
                           fit: BoxFit.contain,
@@ -137,7 +140,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       duration: const Duration(milliseconds: 300),
                       child: ClipOval(
                         child: Image.asset(
-                          'assets/images/luma.png',
+                          AppAssets.luma,
                           width: 300,
                           height: 300,
                           fit: BoxFit.contain,
@@ -195,11 +198,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                   elevation: 2,
                 ),
-                child: const Row(
+                child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      'Get Started',
+                      AppLocalizations.of(context)!.getStarted,
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 16,
@@ -243,12 +246,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   void _handleGetStarted() {
     debugPrint('WelcomeScreen: Get Started button pressed');
     // Navigate to login screen using GoRouter
-    // context.go('/auth/login');
+    context.goNamed(APP_PAGES.login.toName);
   }
 
   void _handleSignIn() {
     debugPrint('WelcomeScreen: Sign In link pressed');
     // Navigate to login screen using GoRouter
-    // context.go('/auth/login');
+    context.goNamed(APP_PAGES.login.toName);
   }
 }
