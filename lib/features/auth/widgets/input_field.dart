@@ -1,3 +1,4 @@
+import 'package:auralys/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class InputField extends StatefulWidget {
@@ -35,11 +36,7 @@ class _InputFieldState extends State<InputField> {
         children: [
           Text(
             widget.label,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w700,
-              color: Color(0xFF333333),
-            ),
+            style: AppTheme.textSmExtraBold,
           ),
           const SizedBox(height: 8),
           Container(
@@ -70,9 +67,7 @@ class _InputFieldState extends State<InputField> {
                     ),
                     decoration: InputDecoration(
                       hintText: widget.placeholder,
-                      hintStyle: const TextStyle(
-                        color: Color(0xFF999999),
-                      ),
+                      hintStyle: AppTheme.textMdBold,
                       border: InputBorder.none,
                       suffixIcon: widget.isPassword
                           ? IconButton(
