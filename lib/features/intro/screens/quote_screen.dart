@@ -170,7 +170,6 @@ class _QuoteScreenState extends State<QuoteScreen>
   @override
   void initState() {
     super.initState();
-    debugPrint('QuoteScreen: initState called');
 
     _fadeController = AnimationController(
       duration: const Duration(milliseconds: 300),
@@ -180,13 +179,6 @@ class _QuoteScreenState extends State<QuoteScreen>
     _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(parent: _fadeController, curve: Curves.easeInOut),
     );
-
-    _fadeController.addStatusListener((status) {
-      debugPrint('Fade animation status: $status');
-      if (status == AnimationStatus.completed) {
-        debugPrint("Fade animation completed");
-      }
-    });
 
     _startTypewriterEffect();
   }
@@ -198,7 +190,6 @@ class _QuoteScreenState extends State<QuoteScreen>
   }
 
   void _startTypewriterEffect() {
-    debugPrint('QuoteScreen: Starting typewriter effect');
     _typewriterTimer = Timer.periodic(const Duration(milliseconds: 30), (
       timer,
     ) {
@@ -209,9 +200,6 @@ class _QuoteScreenState extends State<QuoteScreen>
         });
       } else {
         timer.cancel();
-        debugPrint(
-          'QuoteScreen: Typewriter complete, showing author and button',
-        );
         setState(() {
           _showAuthorAndButton = true;
         });
