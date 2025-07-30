@@ -141,5 +141,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _handleSignIn() {
     debugPrint('LoginScreen: Sign In button pressed');
+    context.pushNamed(APP_PAGES.assessments.toName);
   }
 }
