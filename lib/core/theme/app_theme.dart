@@ -41,8 +41,12 @@ class AppTheme {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.white,
-        backgroundColor:
-            AppColors.light.purple, // Utilise purple pour les boutons
+        backgroundColor: AppColors.light.purple,
+        padding: const EdgeInsets.symmetric(
+          vertical: AppSizes.padding,
+          horizontal: AppSizes.doublePadding,
+        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
@@ -71,7 +75,9 @@ class AppTheme {
     textTheme: TextTheme(
       titleLarge: headingSmExtraBold,
       titleMedium: subtitleTheme.copyWith(color: AppColors.dark.onBackground),
-      titleSmall: headingSmSemiBold.copyWith(color: AppColors.dark.onBackground),
+      titleSmall: headingSmSemiBold.copyWith(
+        color: AppColors.dark.onBackground,
+      ),
       bodySmall: smallTextTheme.copyWith(
         color: AppColors.dark.onPrimaryContainer,
       ),
@@ -95,11 +101,6 @@ class AppTheme {
   );
 
   // Text Styles
-  static TextStyle textSmBold = TextStyle(
-    color: AppColors.light.primary,
-    fontWeight: FontWeight.w800,
-    fontSize: AppSizes.titleSmall,
-  );
   static TextStyle subtitleTheme = TextStyle(
     color: AppColors.light.onPrimaryContainer,
     fontWeight: FontWeight.w500,
@@ -149,24 +150,44 @@ class AppTheme {
   );
 
   // Heading Md Styles
-  static TextStyle headingMd = TextStyle(fontSize: AppSizes.font36);
-  static TextStyle headingMdExtraBold = headingMd.copyWith(
+  static TextStyle _headingMd = TextStyle(fontSize: AppSizes.font36);
+  static TextStyle headingMdExtraBold = _headingMd.copyWith(
     fontWeight: FontWeight.w700,
   );
-  static TextStyle headingMdBold = headingMd.copyWith(
+  static TextStyle headingMdBold = _headingMd.copyWith(
     fontWeight: FontWeight.w600,
   );
-  static TextStyle headingMdSemiBold = headingMd.copyWith(
+  static TextStyle headingMdSemiBold = _headingMd.copyWith(
     fontWeight: FontWeight.w500,
   );
 
   // Text Lg Styles
-  static TextStyle textLg = TextStyle(fontSize: AppSizes.font18);
-  static TextStyle textLgExtraBold = textLg.copyWith(
+  static final TextStyle _textLg = TextStyle(fontSize: AppSizes.font18);
+  static TextStyle textLgExtraBold = _textLg.copyWith(
     fontWeight: FontWeight.w700,
   );
-  static TextStyle textLgBold = textLg.copyWith(fontWeight: FontWeight.w600);
-  static TextStyle textLgSemiBold = textLg.copyWith(
+  static TextStyle textLgBold = _textLg.copyWith(fontWeight: FontWeight.w600);
+  static TextStyle textLgSemiBold = _textLg.copyWith(
+    fontWeight: FontWeight.w500,
+  );
+
+  // Text Md Styles
+  static final TextStyle _textMd = TextStyle(fontSize: AppSizes.font14);
+  static TextStyle textMdExtraBold = _textMd.copyWith(
+    fontWeight: FontWeight.w700,
+  );
+  static TextStyle textMdBold = _textMd.copyWith(fontWeight: FontWeight.w600);
+  static TextStyle textMdSemiBold = _textMd.copyWith(
+    fontWeight: FontWeight.w500,
+  );
+
+  // Text Sm Styles
+  static TextStyle textSm = TextStyle(fontSize: AppSizes.font14);
+  static TextStyle textSmExtraBold = textSm.copyWith(
+    fontWeight: FontWeight.w700,
+  );
+  static TextStyle textSmBold = textSm.copyWith(fontWeight: FontWeight.w600);
+  static TextStyle textSmSemiBold = textSm.copyWith(
     fontWeight: FontWeight.w500,
   );
 
