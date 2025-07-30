@@ -13,7 +13,7 @@ class AppSizes {
   static const double font24 = 24.0;
   static const double font30 = 30.0;
   static const double font36 = 36.0;
-  static const double font48 = 18.0;
+  static const double font48 = 48.0;
 
   static const double tinyPadding = 4.0;
   static const double horizontalPadding = 8.0;
