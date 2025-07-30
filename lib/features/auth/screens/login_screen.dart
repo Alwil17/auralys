@@ -33,87 +33,81 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 const LogoWidget(),
 
+                const SizedBox(height: AppSizes.font48),
+
                 Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.only(top: 40),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Sign in to Auralys',
-                          style: theme.textTheme.titleLarge,
-                        ),
+                  child: Column(
+                    spacing: AppSizes.font48,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Sign in to Auralys',
+                        style: theme.textTheme.titleLarge,
+                      ),
 
-                        const SizedBox(height: AppSizes.font48),
+                      Column(
+                        children: [
+                          InputField(
+                            icon: Icons.mail_outline,
+                            label: 'Email',
+                            placeholder: 'Email Address',
+                            controller: _emailController,
+                            keyboardType: TextInputType.emailAddress,
+                          ),
 
-                        Column(
-                          children: [
-                            InputField(
-                              icon: Icons.mail_outline,
-                              label: 'Email',
-                              placeholder: 'Email Address',
-                              controller: _emailController,
-                              keyboardType: TextInputType.emailAddress,
-                            ),
+                          InputField(
+                            icon: Icons.lock_outline,
+                            label: 'Password',
+                            placeholder: 'Enter your password...',
+                            controller: _passwordController,
+                            isPassword: true,
+                          ),
 
-                            InputField(
-                              icon: Icons.lock_outline,
-                              label: 'Password',
-                              placeholder: 'Enter your password...',
-                              controller: _passwordController,
-                              isPassword: true,
-                            ),
+                          PrimaryButton(
+                            text: 'Sign In',
+                            onPressed: _handleSignIn,
+                          ),
+                        ],
+                      ),
 
-                            PrimaryButton(
-                              text: 'Sign In',
-                              onPressed: _handleSignIn,
-                            ),
-                          ],
-                        ),
+                      const SocialLoginRow(),
 
-                        const SizedBox(height: 30),
-
-                        const SocialLoginRow(),
-
-                        const SizedBox(height: 30),
-
-                        Column(
-                          children: [
-                            RichText(
-                              text: const TextSpan(
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Color(0xFF666666),
-                                ),
-                                children: [
-                                  TextSpan(text: "Don't have an account? "),
-                                  TextSpan(
-                                    text: 'Sign Up.',
-                                    style: TextStyle(
-                                      color: Color(0xFF2196F3),
-                                      fontWeight: FontWeight.w600,
-                                      decoration: TextDecoration.underline,
-                                    ),
+                      Column(
+                        children: [
+                          RichText(
+                            text: const TextSpan(
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Color(0xFF666666),
+                              ),
+                              children: [
+                                TextSpan(text: "Don't have an account? "),
+                                TextSpan(
+                                  text: 'Sign Up.',
+                                  style: TextStyle(
+                                    color: Color(0xFF2196F3),
+                                    fontWeight: FontWeight.w600,
+                                    decoration: TextDecoration.underline,
                                   ),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            GestureDetector(
-                              onTap: _handleForgotPassword,
-                              child: const Text(
-                                'Forgot Password',
-                                style: TextStyle(
-                                  color: Color(0xFF2196F3),
-                                  fontWeight: FontWeight.w600,
-                                  decoration: TextDecoration.underline,
                                 ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          GestureDetector(
+                            onTap: _handleForgotPassword,
+                            child: const Text(
+                              'Forgot Password',
+                              style: TextStyle(
+                                color: Color(0xFF2196F3),
+                                fontWeight: FontWeight.w600,
+                                decoration: TextDecoration.underline,
                               ),
                             ),
-                          ],
-                        ),
-                      ],
-                    ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ],
