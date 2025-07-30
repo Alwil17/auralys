@@ -22,69 +22,13 @@ class _LoaderScreenState extends State<LoaderScreen>
   bool _hasNavigated = false;
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: SizedBox(
-          width: _size,
-          height: _size,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              // Animated circles
-              ...List.generate(3, (index) {
-                return AnimatedBuilder(
-                  animation: _circleController,
-                  builder: (context, child) {
-                    return Transform.scale(
-                      scale: _circleScaleAnimations[index].value,
-                      child: Container(
-                        width: _size,
-                        height: _size,
-                        decoration: BoxDecoration(
-                          color: _color.withOpacity(
-                            _circleOpacityAnimations[index].value,
-                          ),
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                    );
-                  },
-                );
-              }),
-              // Animated percentage text
-              AnimatedBuilder(
-                animation: _progressAnimation,
-                builder: (context, child) {
-                  return Text(
-                    '${_progressAnimation.value.round()}%',
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF333333),
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  @override
-  void dispose() {
-    debugPrint('LoaderScreen: Disposing controllers');
-    _progressController.dispose();
-    _circleController.dispose();
-    super.dispose();
-  }
-
-  @override
   void initState() {
     super.initState();
 
+    _initAnimations();
+  }
+
+  void _initAnimations() {
     // Progress animation (0 to 100 over 3 seconds)
     _progressController = AnimationController(
       duration: const Duration(milliseconds: 3000),
@@ -132,7 +76,6 @@ class _LoaderScreenState extends State<LoaderScreen>
     _progressController.addStatusListener((status) {
       if (status == AnimationStatus.completed && !_hasNavigated) {
         _hasNavigated = true;
-        debugPrint('LoaderScreen: Navigation to quote screen');
         if (mounted) {
           _progressController.stop();
           context.pushReplacementNamed(APP_PAGES.quote.toName);
@@ -143,5 +86,83 @@ class _LoaderScreenState extends State<LoaderScreen>
     // Start animations
     _progressController.forward();
     _circleController.repeat();
+  }
+
+  @override
+  void dispose() {
+    _progressController.dispose();
+    _circleController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: SizedBox(
+          width: _size,
+          height: _size,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              // Animated circles (extrait dans un widget dédié)
+              ...List.generate(3, (index) {
+                return _AnimatedCircle(
+                  scaleAnimation: _circleScaleAnimations[index],
+                  opacityAnimation: _circleOpacityAnimations[index],
+                  color: _color,
+                  size: _size,
+                );
+              }),
+              // Animated percentage text
+              AnimatedBuilder(
+                animation: _progressAnimation,
+                builder: (context, child) {
+                  return Text(
+                    '${_progressAnimation.value.round()}%',
+                    style: Theme.of(context).textTheme.labelLarge!,
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// Widget dédié pour un cercle animé
+class _AnimatedCircle extends StatelessWidget {
+  final Animation<double> scaleAnimation;
+  final Animation<double> opacityAnimation;
+  final Color color;
+  final double size;
+
+  const _AnimatedCircle({
+    required this.scaleAnimation,
+    required this.opacityAnimation,
+    required this.color,
+    required this.size,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: scaleAnimation,
+      builder: (context, child) {
+        return Transform.scale(
+          scale: scaleAnimation.value,
+          child: Container(
+            width: size,
+            height: size,
+            decoration: BoxDecoration(
+              color: color.withOpacity(opacityAnimation.value),
+              shape: BoxShape.circle,
+            ),
+          ),
+        );
+      },
+    );
   }
 }
