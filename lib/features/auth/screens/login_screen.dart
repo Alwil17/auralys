@@ -4,6 +4,7 @@ import 'package:auralys/features/auth/widgets/input_field.dart';
 import 'package:auralys/features/auth/widgets/logo_widget.dart';
 import 'package:auralys/features/auth/widgets/primary_button.dart';
 import 'package:auralys/features/auth/widgets/social_login_row.dart';
+import 'package:auralys/shared/app_sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -20,6 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       body: Stack(
         children: [
@@ -37,17 +39,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const Text(
+                        Text(
                           'Sign in to Auralys',
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.w800,
-                            color: Color(0xFF333333),
-                            height: 1.27,
-                          ),
+                          style: theme.textTheme.titleLarge,
                         ),
 
-                        const SizedBox(height: 30),
+                        const SizedBox(height: AppSizes.font48),
 
                         Column(
                           children: [
