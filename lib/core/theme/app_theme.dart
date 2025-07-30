@@ -9,23 +9,31 @@ class AppTheme {
     useMaterial3: true,
     brightness: Brightness.light,
     colorScheme: ColorScheme.light(
-      primary: AppColors.light.purple, // Utilise le purple comme couleur principale
+      primary: AppColors.light.purple,
+      // Utilise le purple comme couleur principale
       secondary: AppColors.light.secondary,
       primaryContainer: AppColors.light.primaryContainer,
       onPrimaryContainer: AppColors.light.onPrimaryContainer,
       surface: AppColors.light.background,
       onSurface: AppColors.light.onBackground,
-      tertiary: AppColors.light.primary, // Garde l'ancienne couleur primaire comme tertiaire
+      tertiary: AppColors
+          .light
+          .primary, // Garde l'ancienne couleur primaire comme tertiaire
     ),
     scaffoldBackgroundColor: AppColors.light.background,
     fontFamily: 'Urbanist',
+    buttonTheme: ButtonThemeData(
+      buttonColor: AppColors.light.purple,
+      textTheme: ButtonTextTheme.primary,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+    ),
     textTheme: TextTheme(
-      titleLarge: titleTheme.copyWith(color: AppColors.light.primary),
+      titleLarge: headingSmExtraBold.copyWith(color: AppColors.light.primary),
       titleMedium: subtitleTheme,
-      titleSmall: titleSmallTheme,
+      titleSmall: headingSmSemiBold,
       bodySmall: smallTextTheme,
       labelLarge: labelLarge,
-      labelMedium: labelMedium,
+      labelMedium: paragraphLg,
       labelSmall: labelSmall,
       displayMedium: displayMedium,
       displaySmall: displaySmall,
@@ -33,7 +41,8 @@ class AppTheme {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.white,
-        backgroundColor: AppColors.light.purple, // Utilise purple pour les boutons
+        backgroundColor:
+            AppColors.light.purple, // Utilise purple pour les boutons
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
@@ -48,7 +57,8 @@ class AppTheme {
     useMaterial3: true,
     brightness: Brightness.dark,
     colorScheme: ColorScheme.dark(
-      primary: AppColors.dark.purple, // Utilise le purple pour le dark mode aussi
+      primary: AppColors.dark.purple,
+      // Utilise le purple pour le dark mode aussi
       secondary: AppColors.dark.secondary,
       primaryContainer: AppColors.dark.primaryContainer,
       onPrimaryContainer: AppColors.dark.onPrimaryContainer,
@@ -59,24 +69,16 @@ class AppTheme {
     scaffoldBackgroundColor: AppColors.dark.background,
     fontFamily: "Urbanist",
     textTheme: TextTheme(
-      titleLarge: titleTheme,
-      titleMedium: subtitleTheme.copyWith(
-        color: AppColors.dark.onBackground,
-      ),
-      titleSmall: titleSmallTheme.copyWith(
-        color: AppColors.dark.onBackground,
-      ),
+      titleLarge: headingSmExtraBold,
+      titleMedium: subtitleTheme.copyWith(color: AppColors.dark.onBackground),
+      titleSmall: headingSmSemiBold.copyWith(color: AppColors.dark.onBackground),
       bodySmall: smallTextTheme.copyWith(
         color: AppColors.dark.onPrimaryContainer,
       ),
-      labelLarge: labelLarge.copyWith(
-        color: AppColors.dark.onPrimaryContainer,
-      ),
+      labelLarge: labelLarge.copyWith(color: AppColors.dark.onPrimaryContainer),
       labelMedium: labelMedium.copyWith(color: AppColors.dark.onBackground),
       labelSmall: labelSmall.copyWith(color: AppColors.dark.onBackground),
-      displayMedium: displayMedium.copyWith(
-        color: AppColors.dark.onBackground,
-      ),
+      displayMedium: displayMedium.copyWith(color: AppColors.dark.onBackground),
       displaySmall: displaySmall,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
@@ -93,11 +95,7 @@ class AppTheme {
   );
 
   // Text Styles
-  static const TextStyle titleTheme = TextStyle(
-    fontWeight: FontWeight.w800,
-    fontSize: AppSizes.title,
-  );
-  static TextStyle titleSmallTheme = TextStyle(
+  static TextStyle textSmBold = TextStyle(
     color: AppColors.light.primary,
     fontWeight: FontWeight.w800,
     fontSize: AppSizes.titleSmall,
@@ -137,6 +135,59 @@ class AppTheme {
     fontWeight: FontWeight.w800,
     fontSize: AppSizes.smallText,
   );
+
+  // Heading Sm Styles
+  static TextStyle headingSm = TextStyle(fontSize: AppSizes.font30);
+  static TextStyle headingSmExtraBold = headingSm.copyWith(
+    fontWeight: FontWeight.w700,
+  );
+  static TextStyle headingSmBold = headingSm.copyWith(
+    fontWeight: FontWeight.w600,
+  );
+  static TextStyle headingSmSemiBold = headingSm.copyWith(
+    fontWeight: FontWeight.w500,
+  );
+
+  // Heading Md Styles
+  static TextStyle headingMd = TextStyle(fontSize: AppSizes.font36);
+  static TextStyle headingMdExtraBold = headingMd.copyWith(
+    fontWeight: FontWeight.w700,
+  );
+  static TextStyle headingMdBold = headingMd.copyWith(
+    fontWeight: FontWeight.w600,
+  );
+  static TextStyle headingMdSemiBold = headingMd.copyWith(
+    fontWeight: FontWeight.w500,
+  );
+
+  // Text Lg Styles
+  static TextStyle textLg = TextStyle(fontSize: AppSizes.font18);
+  static TextStyle textLgExtraBold = textLg.copyWith(
+    fontWeight: FontWeight.w700,
+  );
+  static TextStyle textLgBold = textLg.copyWith(fontWeight: FontWeight.w600);
+  static TextStyle textLgSemiBold = textLg.copyWith(
+    fontWeight: FontWeight.w500,
+  );
+
+  // Paragraph Styles
+  static TextStyle paragraph = TextStyle(fontWeight: FontWeight.w400);
+  static TextStyle paragraphXs = paragraph.copyWith(fontSize: AppSizes.font12);
+  static TextStyle paragraphSm = paragraph.copyWith(fontSize: AppSizes.font14);
+  static TextStyle paragraphMd = paragraph.copyWith(fontSize: AppSizes.font16);
+  static TextStyle paragraphLg = paragraph.copyWith(fontSize: AppSizes.font18);
+  static TextStyle paragraphXl = paragraph.copyWith(fontSize: AppSizes.font20);
+  static TextStyle paragraph2Xl = paragraph.copyWith(fontSize: AppSizes.font24);
+
+  // Label Styles
+  static TextStyle label = TextStyle(fontWeight: FontWeight.w700);
+  static TextStyle labelXs = label.copyWith(fontSize: AppSizes.font10);
+  static TextStyle labelSm = label.copyWith(fontSize: AppSizes.font12);
+  static TextStyle labelMd = label.copyWith(fontSize: AppSizes.font14);
+  static TextStyle labelLg = label.copyWith(fontSize: AppSizes.font16);
+  static TextStyle labelXl = label.copyWith(fontSize: AppSizes.font18);
+  static TextStyle label2Xl = label.copyWith(fontSize: AppSizes.font20);
+
   static ButtonStyle outlinedButtonStyle = OutlinedButton.styleFrom(
     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
   );
@@ -150,6 +201,7 @@ class AppTheme {
       vertical: AppSizes.padding,
       horizontal: AppSizes.doublePadding,
     ),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
   );
   static ButtonStyle circularElevatedButtonStyle = elevatedButtonStyle.copyWith(
     padding: WidgetStateProperty.all(
