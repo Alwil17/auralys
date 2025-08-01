@@ -13,7 +13,7 @@ class AssessmentScreen extends StatefulWidget {
 }
 
 class _AssessmentScreenState extends State<AssessmentScreen> {
-  static const int _totalSteps = 6;
+  static const int _totalSteps = 7;
   final PageController _pageController = PageController();
   int _currentStep = 1;
 
@@ -173,19 +173,6 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
     if (_currentStep > 1) {
       setState(() {
         _currentStep--;
-      });
-      _pageController.animateToPage(
-        _currentStep - 1,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
-    }
-  }
-
-  void _goToStep(int step) {
-    if (step >= 1 && step <= _totalSteps) {
-      setState(() {
-        _currentStep = step;
       });
       _pageController.animateToPage(
         _currentStep - 1,
