@@ -1,6 +1,10 @@
 import 'package:auralys/features/assessments/widgets/steps/age_step.dart';
 import 'package:auralys/features/assessments/widgets/steps/gender_step.dart';
+import 'package:auralys/features/assessments/widgets/steps/habits_step.dart';
+import 'package:auralys/features/assessments/widgets/steps/life_satisfaction_step.dart';
 import 'package:auralys/features/assessments/widgets/steps/mood_step.dart';
+import 'package:auralys/features/assessments/widgets/steps/sleep_step.dart';
+import 'package:auralys/features/assessments/widgets/steps/wellness_goals_step.dart';
 import 'package:flutter/material.dart';
 
 class StepContent extends StatelessWidget {
@@ -61,106 +65,6 @@ class StepContent extends StatelessWidget {
     );
   }
 
-  Widget _buildFinalStep() {
-    return Container(
-      constraints: const BoxConstraints(maxWidth: 600),
-      child: Column(
-        children: [
-          // Placeholder for final questions
-          Container(
-            height: 220,
-            decoration: BoxDecoration(
-              color: Colors.grey.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: const Center(
-              child: Text(
-                'Final Questions\n(Goals, Preferences, etc.)',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, color: Colors.grey),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildHabitsStep() {
-    return Container(
-      constraints: const BoxConstraints(maxWidth: 600),
-      child: Column(
-        children: [
-          // Placeholder for habits questionnaire
-          Container(
-            height: 300,
-            decoration: BoxDecoration(
-              color: Colors.grey.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: const Center(
-              child: Text(
-                'Daily Habits Questionnaire\n(Exercise, Social activities, etc.)',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, color: Colors.grey),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildMoodStep() {
-    return Container(
-      constraints: const BoxConstraints(maxWidth: 600),
-      child: Column(
-        children: [
-          // Placeholder for mood selection
-          Container(
-            height: 250,
-            decoration: BoxDecoration(
-              color: Colors.grey.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: const Center(
-              child: Text(
-                'Mood Selection\n(Emoji wheel or mood cards)',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, color: Colors.grey),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPersonalInfoStep() {
-    return Container(
-      constraints: const BoxConstraints(maxWidth: 600),
-      child: Column(
-        children: [
-          // Placeholder for personal info form
-          Container(
-            height: 200,
-            decoration: BoxDecoration(
-              color: Colors.grey.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: const Center(
-              child: Text(
-                'Personal Information Form\n(Gender, etc.)',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, color: Colors.grey),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _buildPlaceholderStep(int step) {
     return Container(
       constraints: const BoxConstraints(maxWidth: 600),
@@ -179,31 +83,6 @@ class StepContent extends StatelessWidget {
     );
   }
 
-  Widget _buildSleepStep() {
-    return Container(
-      constraints: const BoxConstraints(maxWidth: 600),
-      child: Column(
-        children: [
-          // Placeholder for sleep assessment
-          Container(
-            height: 280,
-            decoration: BoxDecoration(
-              color: Colors.grey.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: const Center(
-              child: Text(
-                'Sleep Assessment\n(Hours, Quality, Patterns)',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, color: Colors.grey),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   String _getStepSubtitle(int step) {
     switch (step) {
       case 1:
@@ -213,11 +92,13 @@ class StepContent extends StatelessWidget {
       case 3:
         return 'Select the emoji that best represents your current mood.';
       case 4:
-        return 'Tell us about your daily routines and activities.';
+        return 'Understanding your sleep patterns helps us provide better guidance for your wellness journey.';
       case 5:
-        return 'Understanding your sleep patterns helps us provide better guidance.';
+        return 'Tell us about your daily routines and activities that support your well-being.';
       case 6:
-        return 'Just a few more questions to complete your profile.';
+        return 'What areas would you like to focus on for your emotional wellness?';
+      case 7:
+        return 'Rate your current satisfaction with different areas of your life.';
       default:
         return '';
     }
@@ -232,11 +113,13 @@ class StepContent extends StatelessWidget {
       case 3:
         return 'How are you feeling today?';
       case 4:
-        return 'Your Daily Habits';
-      case 5:
         return 'Sleep & Wellness';
+      case 5:
+        return 'Your Daily Habits';
       case 6:
-        return 'Final Questions';
+        return 'Wellness Goals';
+      case 7:
+        return 'Life Satisfaction';
       default:
         return 'Assessment Step $step';
     }
@@ -281,17 +164,21 @@ class StepContent extends StatelessWidget {
       case 3:
         return const MoodStep();
       case 4:
-        return _buildHabitsStep();
+        return const SleepStep();
       case 5:
-        return _buildSleepStep();
+        return const HabitsStep();
       case 6:
-        return _buildFinalStep();
+        return const WellnessGoalsStep();
+      case 7:
+        return const LifeSatisfactionStep();
       default:
         return _buildPlaceholderStep(step);
     }
   }
 
   bool _hasSubtitle(int step) {
-    return ![2].contains(step); // Age step doesn't need subtitle since it's visually clear
+    return ![2].contains(
+      step,
+    ); // Age step doesn't need subtitle since it's visually clear
   }
 }
