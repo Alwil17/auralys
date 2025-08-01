@@ -5,6 +5,7 @@ import 'package:auralys/features/auth/widgets/logo_widget.dart';
 import 'package:auralys/features/auth/widgets/primary_button.dart';
 import 'package:auralys/features/auth/widgets/social_login_row.dart';
 import 'package:auralys/shared/app_sizes.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -19,6 +20,14 @@ class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  final TapGestureRecognizer _signUpRecognizer = TapGestureRecognizer();
+
+  @override
+  void initState() {
+    super.initState();
+    _signUpRecognizer.onTap = _handleSignUp;
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -26,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Stack(
         children: [
           const CircleHeader(),
-          
+
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
             child: Column(
@@ -75,20 +84,21 @@ class _LoginScreenState extends State<LoginScreen> {
                       Column(
                         children: [
                           RichText(
-                            text: const TextSpan(
-                              style: TextStyle(
+                            text: TextSpan(
+                              style: const TextStyle(
                                 fontSize: 14,
                                 color: Color(0xFF666666),
                               ),
                               children: [
-                                TextSpan(text: "Don't have an account? "),
+                                const TextSpan(text: "Don't have an account? "),
                                 TextSpan(
                                   text: 'Sign Up.',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Color(0xFF2196F3),
                                     fontWeight: FontWeight.w600,
                                     decoration: TextDecoration.underline,
                                   ),
+                                  recognizer: _signUpRecognizer,
                                 ),
                               ],
                             ),
@@ -122,6 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _signUpRecognizer.dispose();
     super.dispose();
   }
 
@@ -133,5 +144,10 @@ class _LoginScreenState extends State<LoginScreen> {
   void _handleSignIn() {
     debugPrint('LoginScreen: Sign In button pressed');
     context.pushNamed(APP_PAGES.assessments.toName);
+  }
+
+  void _handleSignUp() {
+    debugPrint('LoginScreen: Sign Up pressed');
+    context.pushNamed(APP_PAGES.register.toName);
   }
 }
