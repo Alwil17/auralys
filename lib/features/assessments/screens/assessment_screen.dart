@@ -114,7 +114,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                 PrimaryButton(
                   text: _currentStep == _totalSteps 
                       ? 'Complete Assessment' 
-                      : 'Continue →',
+                      : 'Continue',
                   onPressed: _handleContinue,
                   margin: EdgeInsets.zero,
                 ),
