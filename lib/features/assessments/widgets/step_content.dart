@@ -4,6 +4,7 @@ import 'package:auralys/features/assessments/widgets/steps/habits_step.dart';
 import 'package:auralys/features/assessments/widgets/steps/life_satisfaction_step.dart';
 import 'package:auralys/features/assessments/widgets/steps/mood_step.dart';
 import 'package:auralys/features/assessments/widgets/steps/sleep_step.dart';
+import 'package:auralys/features/assessments/widgets/steps/stress_level_step.dart';
 import 'package:auralys/features/assessments/widgets/steps/wellness_goals_step.dart';
 import 'package:flutter/material.dart';
 
@@ -94,10 +95,12 @@ class StepContent extends StatelessWidget {
       case 4:
         return 'Understanding your sleep patterns helps us provide better guidance for your wellness journey.';
       case 5:
-        return 'Tell us about your daily routines and activities that support your well-being.';
+        return 'Rate your current stress level on a scale from 1 to 5.';
       case 6:
-        return 'What areas would you like to focus on for your emotional wellness?';
+        return 'Tell us about your daily routines and activities that support your well-being.';
       case 7:
+        return 'What areas would you like to focus on for your emotional wellness?';
+      case 8:
         return 'Rate your current satisfaction with different areas of your life.';
       default:
         return '';
@@ -115,10 +118,12 @@ class StepContent extends StatelessWidget {
       case 4:
         return 'Sleep & Wellness';
       case 5:
-        return 'Your Daily Habits';
+        return 'Stress Level';
       case 6:
-        return 'Wellness Goals';
+        return 'Your Daily Habits';
       case 7:
+        return 'Wellness Goals';
+      case 8:
         return 'Life Satisfaction';
       default:
         return 'Assessment Step $step';
@@ -166,10 +171,12 @@ class StepContent extends StatelessWidget {
       case 4:
         return const SleepStep();
       case 5:
-        return const HabitsStep();
+        return const StressLevelStep();
       case 6:
-        return const WellnessGoalsStep();
+        return const HabitsStep();
       case 7:
+        return const WellnessGoalsStep();
+      case 8:
         return const LifeSatisfactionStep();
       default:
         return _buildPlaceholderStep(step);
