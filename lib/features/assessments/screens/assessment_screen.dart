@@ -13,7 +13,7 @@ class AssessmentScreen extends StatefulWidget {
 }
 
 class _AssessmentScreenState extends State<AssessmentScreen> {
-  static const int _totalSteps = 7;
+  static const int _totalSteps = 8;
   final PageController _pageController = PageController();
   int _currentStep = 1;
 
