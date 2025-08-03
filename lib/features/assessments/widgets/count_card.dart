@@ -7,7 +7,7 @@ class CountCard extends StatelessWidget {
   const CountCard({
     super.key,
     required this.count,
-    this.total = 7,
+    this.total = 8,
   });
 
   @override
