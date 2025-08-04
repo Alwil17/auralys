@@ -7,7 +7,7 @@ import 'package:auralys/features/assessments/widgets/steps/sleep_step.dart';
 import 'package:auralys/features/assessments/widgets/steps/stress_level_step.dart';
 import 'package:flutter/material.dart';
 
-class StepContent extends StatelessWidget {
+class StepContent extends StatefulWidget {
   final int stepIndex;
   final VoidCallback? onNextStep;
   final VoidCallback? onPreviousStep;
@@ -20,6 +20,13 @@ class StepContent extends StatelessWidget {
   });
 
   @override
+  State<StepContent> createState() => _StepContentState();
+}
+
+class _StepContentState extends State<StepContent> {
+  bool _popupShown = false;
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
@@ -30,12 +37,12 @@ class StepContent extends StatelessWidget {
           child: Column(
             children: [
               // Only show title and subtitle for non-special layout steps
-              if (![2].contains(stepIndex)) ...[
+              if (![2].contains(widget.stepIndex)) ...[
                 ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 600),
                   child: Text(
                     textAlign: TextAlign.center,
-                    _getStepTitle(stepIndex),
+                    _getStepTitle(widget.stepIndex),
                     style: theme.textTheme.titleLarge?.copyWith(
                       fontSize: 28,
                       fontWeight: FontWeight.w800,
@@ -43,13 +50,13 @@ class StepContent extends StatelessWidget {
                   ),
                 ),
 
-                if (_hasSubtitle(stepIndex)) ...[
+                if (_hasSubtitle(widget.stepIndex)) ...[
                   const SizedBox(height: 16),
                   ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 600),
                     child: Text(
                       textAlign: TextAlign.center,
-                      _getStepSubtitle(stepIndex),
+                      _getStepSubtitle(widget.stepIndex),
                       style: theme.textTheme.titleMedium?.copyWith(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
@@ -62,7 +69,7 @@ class StepContent extends StatelessWidget {
                 const SizedBox(height: 40),
               ],
 
-              _getStepWidget(context, stepIndex),
+              _getStepWidget(context, widget.stepIndex),
 
               const SizedBox(height: 40),
             ],
@@ -70,6 +77,15 @@ class StepContent extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void didUpdateWidget(StepContent oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Reset popup flag when step changes
+    if (oldWidget.stepIndex != widget.stepIndex) {
+      _popupShown = false;
+    }
   }
 
   Widget _buildPlaceholderStep(int step) {
@@ -190,10 +206,14 @@ class StepContent extends StatelessWidget {
   }
 
   Widget _MoodAnalysisPermissionStep() {
-    return Builder(
-      builder: (context) {
-        // Auto-show the popup when this step is displayed
-        WidgetsBinding.instance.addPostFrameCallback((_) {
+    // Montrer le popup seulement si il n'a pas déjà été montré
+    if (!_popupShown) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted && !_popupShown) {
+          setState(() {
+            _popupShown = true;
+          });
+          
           showDialog<bool>(
             context: context,
             barrierDismissible: false,
@@ -201,41 +221,41 @@ class StepContent extends StatelessWidget {
               onYes: () {
                 Navigator.of(context).pop(); // Close the dialog
                 // Proceed to next step
-                onNextStep?.call();
+                widget.onNextStep?.call();
                 debugPrint('Mood analysis permission: true - proceeding to next step');
               },
               onNo: () {
                 Navigator.of(context).pop(); // Close the dialog
                 // Proceed to next step (user declined but we still continue)
-                onNextStep?.call();
+                widget.onNextStep?.call();
                 debugPrint('Mood analysis permission: false - proceeding to next step');
               },
             ),
           );
-        });
+        }
+      });
+    }
 
-        // Return a placeholder that will be covered by the popup
-        return Container(
-          constraints: const BoxConstraints(maxWidth: 600),
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            children: [
-              Icon(
-                Icons.psychology_outlined,
-                size: 60,
-                color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.5),
-              ),
-              const SizedBox(height: 16),
-              Text(
-                'Preparing mood analysis...',
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
-                ),
-              ),
-            ],
+    // Return a placeholder that will be covered by the popup
+    return Container(
+      constraints: const BoxConstraints(maxWidth: 600),
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        children: [
+          Icon(
+            Icons.psychology_outlined,
+            size: 60,
+            color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.5),
           ),
-        );
-      },
+          const SizedBox(height: 16),
+          Text(
+            'Preparing mood analysis...',
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
