@@ -13,14 +13,15 @@ class AssessmentScreen extends StatefulWidget {
 }
 
 class _AssessmentScreenState extends State<AssessmentScreen> {
-  static const int _totalSteps = 10; // Updated to include all steps including popup and name step
+  static const int _totalSteps = 7; // Updated to include all steps including popup and name step
   final PageController _pageController = PageController();
   int _currentStep = 1;
+  String _userName = '';
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    
+
     return PopScope(
       canPop: _currentStep == 1,
       onPopInvokedWithResult: (didPop, result) async {
@@ -49,9 +50,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
               color: theme.colorScheme.tertiary,
             ),
           ),
-          actions: [
-            CountCard(count: _currentStep, total: _totalSteps),
-          ],
+          actions: [CountCard(count: _currentStep, total: _totalSteps)],
           centerTitle: true,
         ),
         body: PageView.builder(
@@ -63,6 +62,11 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
               stepIndex: index + 1,
               onNextStep: _goToNextStep,
               onPreviousStep: _goToPreviousStep,
+              onNameChanged: (name) {
+                setState(() {
+                  _userName = name;
+                });
+              },
             );
           },
         ),
@@ -79,7 +83,9 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                     child: OutlinedButton(
                       onPressed: () => _goToNextStep(),
                       style: OutlinedButton.styleFrom(
-                        backgroundColor: theme.colorScheme.secondary.withValues(alpha: 0.1),
+                        backgroundColor: theme.colorScheme.secondary.withValues(
+                          alpha: 0.1,
+                        ),
                         side: BorderSide(color: theme.colorScheme.secondary),
                         padding: const EdgeInsets.symmetric(
                           vertical: 14,
@@ -113,11 +119,11 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                     ),
                   ),
                 ],
-                
+
                 // Main continue/finish button
                 PrimaryButton(
-                  text: _currentStep == _totalSteps 
-                      ? 'Complete Assessment' 
+                  text: _currentStep == _totalSteps
+                      ? 'Complete Assessment'
                       : 'Continue',
                   onPressed: _handleContinue,
                   margin: EdgeInsets.zero,
@@ -138,26 +144,10 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
 
   void _completeAssessment() {
     debugPrint('AssessmentScreen: Assessment completed');
-    
-    // Show completion dialog or navigate to results
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Assessment Complete'),
-        content: const Text(
-          'Thank you for completing your emotional assessment. Your personalized recommendations are being prepared.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              context.go('/dashboard'); // Navigate to main app
-            },
-            child: const Text('Continue to App'),
-          ),
-        ],
-      ),
-    );
+
+    // Navigate to transition screen with user's name
+    final userName = _userName.isNotEmpty ? _userName : 'there';
+    context.go('/transition?name=${Uri.encodeComponent(userName)}');
   }
 
   void _goToNextStep() {
@@ -188,7 +178,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
 
   void _handleContinue() {
     debugPrint('AssessmentScreen: Continue pressed for step $_currentStep');
-    
+
     if (_currentStep == _totalSteps) {
       // Complete assessment
       _completeAssessment();

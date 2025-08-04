@@ -1,8 +1,10 @@
 import 'package:auralys/core/router/routes.dart';
 import 'package:auralys/features/assessments/screens/assessment_screen.dart';
+import 'package:auralys/features/assessments/screens/transition_screen.dart';
 import 'package:auralys/features/auth/screens/forgot_password_screen.dart';
 import 'package:auralys/features/auth/screens/login_screen.dart';
 import 'package:auralys/features/auth/screens/register_screen.dart';
+import 'package:auralys/features/home/screens/home_screen.dart';
 import 'package:auralys/features/intro/screens/loader_screen.dart';
 import 'package:auralys/features/intro/screens/quote_screen.dart';
 import 'package:auralys/features/intro/screens/splash_screen.dart';
@@ -57,6 +59,19 @@ class AppRouter {
         path: APP_PAGES.assessments.toPath,
         name: APP_PAGES.assessments.toName,
         builder: (context, state) => AssessmentScreen(),
+      ),
+      GoRoute(
+        path: APP_PAGES.transition.toPath,
+        name: APP_PAGES.transition.toName,
+        builder: (context, state) {
+          final userName = state.uri.queryParameters['name'] ?? 'there';
+          return TransitionScreen(username: userName);
+        },
+      ),
+      GoRoute(
+        path: APP_PAGES.home.toPath,
+        name: APP_PAGES.home.toName,
+        builder: (context, state) => HomeScreen(),
       ),
     ],
     debugLogDiagnostics: true,

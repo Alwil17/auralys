@@ -208,16 +208,4 @@ class _MoodAnalysisPermissionPopupState extends State<MoodAnalysisPermissionPopu
       ],
     );
   }
-
-  // Static method to show the popup
-  static Future<bool?> show(BuildContext context) {
-    return showDialog<bool>(
-      context: context,
-      barrierDismissible: false, // User must choose an option
-      builder: (context) => MoodAnalysisPermissionPopup(
-        onYes: () => Navigator.of(context).pop(true),
-        onNo: () => Navigator.of(context).pop(false),
-      ),
-    );
-  }
 }

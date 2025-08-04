@@ -7,7 +7,8 @@ enum APP_PAGES {
   register, 
   home, 
   welcome,
-  assessments
+  assessments,
+  transition
 }
 
 abstract class Routes {
@@ -20,6 +21,7 @@ abstract class Routes {
   static const String register = "/register";
   static const String home = "/home";
   static const String assessments = "/assessments";
+  static const String transition = "/transition";
 }
 
 extension AppPageExtension on APP_PAGES {
@@ -45,6 +47,8 @@ extension AppPageExtension on APP_PAGES {
         return Routes.home;
       case APP_PAGES.assessments:
         return Routes.assessments;
+      case APP_PAGES.transition:
+        return Routes.transition;
     }
   }
 }

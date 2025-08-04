@@ -59,33 +59,39 @@ class _LoaderScreenState extends State<LoaderScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: SizedBox(
-          width: _size,
-          height: _size,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              // Animated circles (extrait dans un widget dédié)
-              ...List.generate(3, (index) {
-                return _AnimatedCircle(
-                  scaleAnimation: _circleScaleAnimations[index],
-                  opacityAnimation: _circleOpacityAnimations[index],
-                  color: _color,
-                  size: _size,
-                );
-              }),
-              // Animated percentage text
-              AnimatedBuilder(
-                animation: _progressAnimation,
-                builder: (context, child) {
-                  return Text(
-                    '${_progressAnimation.value.round()}%',
-                    style: Theme.of(context).textTheme.labelLarge!,
+      body: RepaintBoundary(
+        child: Center(
+          child: SizedBox(
+            width: _size,
+            height: _size,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                // Animated circles (extrait dans un widget dédié)
+                ...List.generate(3, (index) {
+                  return RepaintBoundary(
+                    child: _AnimatedCircle(
+                      scaleAnimation: _circleScaleAnimations[index],
+                      opacityAnimation: _circleOpacityAnimations[index],
+                      color: _color,
+                      size: _size,
+                    ),
                   );
-                },
-              ),
-            ],
+                }),
+                // Animated percentage text
+                RepaintBoundary(
+                  child: AnimatedBuilder(
+                    animation: _progressAnimation,
+                    builder: (context, child) {
+                      return Text(
+                        '${_progressAnimation.value.round()}%',
+                        style: Theme.of(context).textTheme.labelLarge!,
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -107,9 +113,9 @@ class _LoaderScreenState extends State<LoaderScreen>
   }
 
   void _initAnimations() {
-    // Progress animation (0 to 100 over 3 seconds)
+    // Progress animation (0 to 100 over 1.5 seconds)
     _progressController = AnimationController(
-      duration: const Duration(milliseconds: 3000),
+      duration: const Duration(milliseconds: 1500),
       vsync: this,
     );
 
@@ -125,11 +131,11 @@ class _LoaderScreenState extends State<LoaderScreen>
 
     // Create animations for each of the 3 circles with staggered delays
     _circleOpacityAnimations = List.generate(3, (index) {
-      return Tween<double>(begin: 0.7, end: 0.0).animate(
+      return Tween<double>(begin: 0.5, end: 0.0).animate(
         CurvedAnimation(
           parent: _circleController,
           curve: Interval(
-            index * 0.2, // Stagger delay (0, 0.2, 0.4)
+            index * 0.3, // Stagger delay (0, 0.3, 0.4)
             1.0,
             curve: Curves.easeInOut,
           ),
@@ -142,7 +148,7 @@ class _LoaderScreenState extends State<LoaderScreen>
         CurvedAnimation(
           parent: _circleController,
           curve: Interval(
-            index * 0.2, // Stagger delay (0, 0.2, 0.4)
+            index * 0.3, // Stagger delay (0, 0.2, 0.4)
             1.0,
             curve: Curves.easeInOut,
           ),

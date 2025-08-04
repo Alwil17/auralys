@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class NameStep extends StatefulWidget {
-  const NameStep({super.key});
+  final ValueChanged<String>? onNameChanged;
+  
+  const NameStep({
+    super.key,
+    this.onNameChanged,
+  });
 
   @override
   State<NameStep> createState() => _NameStepState();
@@ -65,6 +70,7 @@ class _NameStepState extends State<NameStep> {
             ),
             onChanged: (value) {
               setState(() {}); // Trigger rebuild to update button state
+              widget.onNameChanged?.call(value.trim());
             },
             onSubmitted: (value) {
               if (value.trim().isNotEmpty) {
