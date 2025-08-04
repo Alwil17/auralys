@@ -36,7 +36,7 @@ class ForgotPasswordCard extends StatelessWidget {
               width: 60,
               height: 60,
               decoration: BoxDecoration(
-                color: theme.colorScheme.primary.withOpacity(0.1), // Purple avec transparence
+                color: theme.colorScheme.primary.withValues(alpha: 0.1), // Purple avec transparence
                 borderRadius: BorderRadius.circular(30),
               ),
               child: Icon(
