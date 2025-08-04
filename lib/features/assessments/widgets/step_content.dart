@@ -11,12 +11,14 @@ class StepContent extends StatefulWidget {
   final int stepIndex;
   final VoidCallback? onNextStep;
   final VoidCallback? onPreviousStep;
+  final ValueChanged<String>? onNameChanged;
 
   const StepContent({
     super.key, 
     required this.stepIndex, 
     this.onNextStep,
     this.onPreviousStep,
+    this.onNameChanged,
   });
 
   @override
@@ -193,7 +195,7 @@ class _StepContentState extends State<StepContent> {
       case 6:
         return _MoodAnalysisPermissionStep();
       case 7:
-        return const NameStep();
+        return NameStep(onNameChanged: widget.onNameChanged);
       default:
         return _buildPlaceholderStep(step);
     }
