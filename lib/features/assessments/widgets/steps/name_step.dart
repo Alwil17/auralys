@@ -33,12 +33,12 @@ class _NameStepState extends State<NameStep> {
               hintStyle: theme.textTheme.titleLarge?.copyWith(
                 fontSize: 24,
                 fontWeight: FontWeight.w400,
-                color: theme.colorScheme.onSurface.withOpacity(0.5),
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16),
                 borderSide: BorderSide(
-                  color: theme.colorScheme.outline.withOpacity(0.3),
+                  color: theme.colorScheme.outline.withValues(alpha: 0.3),
                   width: 2,
                 ),
               ),
@@ -52,7 +52,7 @@ class _NameStepState extends State<NameStep> {
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16),
                 borderSide: BorderSide(
-                  color: theme.colorScheme.outline.withOpacity(0.3),
+                  color: theme.colorScheme.outline.withValues(alpha: 0.3),
                   width: 2,
                 ),
               ),
@@ -61,7 +61,7 @@ class _NameStepState extends State<NameStep> {
                 vertical: 20,
               ),
               filled: true,
-              fillColor: theme.colorScheme.surfaceContainer.withOpacity(0.3),
+              fillColor: theme.colorScheme.surfaceContainer.withValues(alpha: 0.3),
             ),
             onChanged: (value) {
               setState(() {}); // Trigger rebuild to update button state
