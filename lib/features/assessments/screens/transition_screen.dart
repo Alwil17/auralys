@@ -61,6 +61,7 @@ class _TransitionScreenState extends State<TransitionScreen>
 
   String _breathingInstruction = "Inhale";
   bool _showButton = false;
+  bool _showCompletionMessage = false;
 
   @override
   Widget build(BuildContext context) {
@@ -109,41 +110,87 @@ class _TransitionScreenState extends State<TransitionScreen>
               Expanded(
                 flex: 2,
                 child: Center(
-                  child: AnimatedBuilder(
-                    animation: _breathingAnimation,
-                    builder: (context, child) {
-                      return Transform.scale(
-                        scale: _breathingAnimation.value,
-                        child: RepaintBoundary(
-                          child: SizedBox(
-                            width: _size,
-                            height: _size,
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                // Cercles animés seulement
-                                ...List.generate(3, (index) {
-                                  return RepaintBoundary(
-                                    child: _AnimatedCircle(
-                                      scaleAnimation: _circleScaleAnimations[index],
-                                      opacityAnimation: _circleOpacityAnimations[index],
-                                      color: _color,
-                                      size: _size,
-                                    ),
-                                  );
-                                }),
-                              ],
+                  child: _showCompletionMessage 
+                    ? // Message de félicitations
+                      RepaintBoundary(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 120,
+                              height: 120,
+                              decoration: BoxDecoration(
+                                color: Colors.green.withValues(alpha: 0.1),
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: Colors.green.withValues(alpha: 0.3),
+                                  width: 2,
+                                ),
+                              ),
+                              child: const Icon(
+                                Icons.check_circle,
+                                size: 60,
+                                color: Colors.green,
+                              ),
                             ),
-                          ),
+                            const SizedBox(height: 24),
+                            Text(
+                              'Good job!',
+                              style: theme.textTheme.headlineMedium?.copyWith(
+                                fontSize: 32,
+                                fontWeight: FontWeight.w800,
+                                color: Colors.green,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'You completed the breathing exercise',
+                              style: theme.textTheme.bodyLarge?.copyWith(
+                                fontSize: 16,
+                                color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
                         ),
-                      );
-                    },
-                  ),
+                      )
+                    : // Animation des cercles de respiration
+                      AnimatedBuilder(
+                        animation: _breathingAnimation,
+                        builder: (context, child) {
+                          return Transform.scale(
+                            scale: _breathingAnimation.value,
+                            child: RepaintBoundary(
+                              child: SizedBox(
+                                width: _size,
+                                height: _size,
+                                child: Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    // Cercles animés seulement
+                                    ...List.generate(3, (index) {
+                                      return RepaintBoundary(
+                                        child: _AnimatedCircle(
+                                          scaleAnimation: _circleScaleAnimations[index],
+                                          opacityAnimation: _circleOpacityAnimations[index],
+                                          color: _color,
+                                          size: _size,
+                                        ),
+                                      );
+                                    }),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
                 ),
               ),
 
               // Instructions de respiration - nouveau composant séparé
-              if (!_showButton) ...[
+              if (!_showButton && !_showCompletionMessage) ...[
                 const SizedBox(height: 32),
                 RepaintBoundary(
                   child: Column(
@@ -248,25 +295,25 @@ class _TransitionScreenState extends State<TransitionScreen>
   }
 
   void _initAnimations() {
-    // Circle animation (similaire au loader)
+    // Circle animation (similaire au loader) - ralentie pour harmoniser avec la respiration
     _circleController = AnimationController(
-      duration: const Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 3000), // Augmenté de 1000ms à 3000ms
       vsync: this,
     );
 
     // Breathing animation (4 seconds inhale + 4 seconds exhale)
     _breathingController = AnimationController(
-      duration: const Duration(seconds: 8),
+      duration: const Duration(seconds: 3),
       vsync: this,
     );
 
     // Create animations for circles
     _circleOpacityAnimations = List.generate(3, (index) {
-      return Tween<double>(begin: 0.3, end: 0.0).animate(
+      return Tween<double>(begin: 0.4, end: 0.0).animate(
         CurvedAnimation(
           parent: _circleController,
           curve: Interval(
-            index * 0.3,
+            index * 0.2, // Même espacement que les animations de scale
             1.0,
             curve: Curves.easeInOut,
           ),
@@ -279,7 +326,7 @@ class _TransitionScreenState extends State<TransitionScreen>
         CurvedAnimation(
           parent: _circleController,
           curve: Interval(
-            index * 0.3,
+            index * 0.2, // Réduit de 0.4 à 0.2 pour des cercles plus espacés temporellement
             1.0,
             curve: Curves.easeInOut,
           ),
@@ -306,10 +353,22 @@ class _TransitionScreenState extends State<TransitionScreen>
 
     void runCycle() {
       if (cycleCount >= totalCycles) {
-        // Terminer et montrer le bouton
+        // Arrêter les animations des cercles
+        _circleController.stop();
+        _breathingController.stop();
+        
+        // Afficher le message de félicitations
         setState(() {
-          _breathingInstruction = "Well done!";
-          _showButton = true;
+          _showCompletionMessage = true;
+        });
+        
+        // Attendre un peu puis montrer le bouton
+        Future.delayed(const Duration(milliseconds: 1000), () {
+          if (mounted) {
+            setState(() {
+              _showButton = true;
+            });
+          }
         });
         return;
       }
