@@ -1,18 +1,23 @@
 import 'package:auralys/features/assessments/widgets/steps/age_step.dart';
 import 'package:auralys/features/assessments/widgets/steps/gender_step.dart';
-import 'package:auralys/features/assessments/widgets/steps/habits_step.dart';
-import 'package:auralys/features/assessments/widgets/steps/life_satisfaction_step.dart';
 import 'package:auralys/features/assessments/widgets/steps/mood_analysis_permission_popup.dart';
 import 'package:auralys/features/assessments/widgets/steps/mood_step.dart';
+import 'package:auralys/features/assessments/widgets/steps/name_step.dart';
 import 'package:auralys/features/assessments/widgets/steps/sleep_step.dart';
 import 'package:auralys/features/assessments/widgets/steps/stress_level_step.dart';
-import 'package:auralys/features/assessments/widgets/steps/wellness_goals_step.dart';
 import 'package:flutter/material.dart';
 
 class StepContent extends StatelessWidget {
   final int stepIndex;
+  final VoidCallback? onNextStep;
+  final VoidCallback? onPreviousStep;
 
-  const StepContent({super.key, required this.stepIndex});
+  const StepContent({
+    super.key, 
+    required this.stepIndex, 
+    this.onNextStep,
+    this.onPreviousStep,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -100,11 +105,7 @@ class StepContent extends StatelessWidget {
       case 6:
         return ''; // This is a popup, no subtitle needed
       case 7:
-        return 'Tell us about your daily routines and activities that support your well-being.';
-      case 8:
-        return 'What areas would you like to focus on for your emotional wellness?';
-      case 9:
-        return 'Rate your current satisfaction with different areas of your life.';
+        return 'Please, tell me your name !!! How should I call you ?';
       default:
         return '';
     }
@@ -125,11 +126,7 @@ class StepContent extends StatelessWidget {
       case 6:
         return 'Mood Analysis Permission'; // This will be covered by popup
       case 7:
-        return 'Your Daily Habits';
-      case 8:
-        return 'Wellness Goals';
-      case 9:
-        return 'Life Satisfaction';
+        return 'Want to know you !';
       default:
         return 'Assessment Step $step';
     }
@@ -180,11 +177,7 @@ class StepContent extends StatelessWidget {
       case 6:
         return _MoodAnalysisPermissionStep();
       case 7:
-        return const HabitsStep();
-      case 8:
-        return const WellnessGoalsStep();
-      case 9:
-        return const LifeSatisfactionStep();
+        return const NameStep();
       default:
         return _buildPlaceholderStep(step);
     }
@@ -206,14 +199,16 @@ class StepContent extends StatelessWidget {
             barrierDismissible: false,
             builder: (context) => MoodAnalysisPermissionPopup(
               onYes: () {
-                Navigator.of(context).pop(true);
-                // Handle the result here - you might want to pass callbacks to parent
-                print('Mood analysis permission: true');
+                Navigator.of(context).pop(); // Close the dialog
+                // Proceed to next step
+                onNextStep?.call();
+                print('Mood analysis permission: true - proceeding to next step');
               },
               onNo: () {
-                Navigator.of(context).pop(false);
-                // Handle the result here - you might want to pass callbacks to parent
-                print('Mood analysis permission: false');
+                Navigator.of(context).pop(); // Close the dialog
+                // Proceed to next step (user declined but we still continue)
+                onNextStep?.call();
+                print('Mood analysis permission: false - proceeding to next step');
               },
             ),
           );
