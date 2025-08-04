@@ -13,7 +13,7 @@ class AssessmentScreen extends StatefulWidget {
 }
 
 class _AssessmentScreenState extends State<AssessmentScreen> {
-  static const int _totalSteps = 8;
+  static const int _totalSteps = 10; // Updated to include all steps including popup and name step
   final PageController _pageController = PageController();
   int _currentStep = 1;
 
@@ -59,7 +59,11 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
           physics: const NeverScrollableScrollPhysics(),
           itemCount: _totalSteps,
           itemBuilder: (context, index) {
-            return StepContent(stepIndex: index + 1);
+            return StepContent(
+              stepIndex: index + 1,
+              onNextStep: _goToNextStep,
+              onPreviousStep: _goToPreviousStep,
+            );
           },
         ),
         bottomNavigationBar: SafeArea(
