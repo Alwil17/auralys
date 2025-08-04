@@ -14,7 +14,7 @@ class SleepTimeChild extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final color = theme.colorScheme.onSurface.withOpacity(
+    final color = theme.colorScheme.onSurface.withValues(alpha: 
       isSelected ? 1.0 : 0.4,
     );
     
@@ -38,7 +38,7 @@ class SleepTimeChild extends StatelessWidget {
             children: [
               Icon(
                 Icons.bedtime_outlined,
-                color: theme.colorScheme.primary.withOpacity(
+                color: theme.colorScheme.primary.withValues(alpha: 
                   isSelected ? 1.0 : 0.4,
                 ),
                 size: 14,

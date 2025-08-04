@@ -33,7 +33,7 @@ class CustomSliderThumbShape extends SliderComponentShape {
     
     // Outer circle (shadow/border effect)
     final outerPaint = Paint()
-      ..color = theme.colorScheme.primary.withOpacity(0.2)
+      ..color = theme.colorScheme.primary.withValues(alpha: 0.2)
       ..style = PaintingStyle.fill;
     canvas.drawCircle(center, enabledThumbRadius + 4, outerPaint);
     
@@ -45,7 +45,7 @@ class CustomSliderThumbShape extends SliderComponentShape {
     
     // Inner highlight
     final innerPaint = Paint()
-      ..color = Colors.white.withOpacity(0.3)
+      ..color = Colors.white.withValues(alpha: 0.3)
       ..style = PaintingStyle.fill;
     canvas.drawCircle(center, enabledThumbRadius * 0.5, innerPaint);
     
@@ -94,9 +94,9 @@ class SleepVerticalSlider extends StatelessWidget {
             ),
             overlayShape: RoundSliderOverlayShape(overlayRadius: 24),
             activeTrackColor: theme.colorScheme.primary,
-            inactiveTrackColor: theme.colorScheme.primary.withOpacity(0.2),
+            inactiveTrackColor: theme.colorScheme.primary.withValues(alpha: 0.2),
             thumbColor: theme.colorScheme.primary,
-            overlayColor: theme.colorScheme.primary.withOpacity(0.1),
+            overlayColor: theme.colorScheme.primary.withValues(alpha: 0.1),
           ),
           child: Slider(
             value: value,

@@ -30,7 +30,7 @@ class SleepEmojiColumn extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: isSelected 
-                      ? theme.colorScheme.primaryContainer.withOpacity(0.3)
+                      ? theme.colorScheme.primaryContainer.withValues(alpha: 0.3)
                       : Colors.transparent,
                 ),
                 child: Center(
