@@ -52,7 +52,7 @@ class _AgeWidget extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(200),
                           side: BorderSide(
-                            color: theme.colorScheme.primary.withOpacity(0.3),
+                            color: theme.colorScheme.primary.withValues(alpha: 0.3),
                             width: 4,
                             strokeAlign: BorderSide.strokeAlignOutside,
                           ),
@@ -83,7 +83,7 @@ class _AgeWidget extends StatelessWidget {
                               ),
                               fontWeight: FontWeight.w900,
                               height: 0.8,
-                              color: theme.colorScheme.onSurface.withOpacity(
+                              color: theme.colorScheme.onSurface.withValues(alpha: 
                                 (constraints.maxHeight / 0.6).toInt().clamp(
                                   0,
                                   255,
