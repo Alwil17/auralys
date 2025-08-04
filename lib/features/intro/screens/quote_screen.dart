@@ -152,7 +152,7 @@ class _QuoteScreenState extends State<QuoteScreen>
                     },
                 ),
 
-              const SizedBox(height: 40),
+              const SizedBox(height: 60),
             ],
           ),
         ),
