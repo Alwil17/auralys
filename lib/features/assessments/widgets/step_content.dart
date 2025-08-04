@@ -2,6 +2,7 @@ import 'package:auralys/features/assessments/widgets/steps/age_step.dart';
 import 'package:auralys/features/assessments/widgets/steps/gender_step.dart';
 import 'package:auralys/features/assessments/widgets/steps/habits_step.dart';
 import 'package:auralys/features/assessments/widgets/steps/life_satisfaction_step.dart';
+import 'package:auralys/features/assessments/widgets/steps/mood_analysis_permission_popup.dart';
 import 'package:auralys/features/assessments/widgets/steps/mood_step.dart';
 import 'package:auralys/features/assessments/widgets/steps/sleep_step.dart';
 import 'package:auralys/features/assessments/widgets/steps/stress_level_step.dart';
@@ -97,10 +98,12 @@ class StepContent extends StatelessWidget {
       case 5:
         return '';
       case 6:
-        return 'Tell us about your daily routines and activities that support your well-being.';
+        return ''; // This is a popup, no subtitle needed
       case 7:
-        return 'What areas would you like to focus on for your emotional wellness?';
+        return 'Tell us about your daily routines and activities that support your well-being.';
       case 8:
+        return 'What areas would you like to focus on for your emotional wellness?';
+      case 9:
         return 'Rate your current satisfaction with different areas of your life.';
       default:
         return '';
@@ -120,10 +123,12 @@ class StepContent extends StatelessWidget {
       case 5:
         return 'How would you rate your stress level?';
       case 6:
-        return 'Your Daily Habits';
+        return 'Mood Analysis Permission'; // This will be covered by popup
       case 7:
-        return 'Wellness Goals';
+        return 'Your Daily Habits';
       case 8:
+        return 'Wellness Goals';
+      case 9:
         return 'Life Satisfaction';
       default:
         return 'Assessment Step $step';
@@ -173,10 +178,12 @@ class StepContent extends StatelessWidget {
       case 5:
         return const StressLevelStep();
       case 6:
-        return const HabitsStep();
+        return _MoodAnalysisPermissionStep();
       case 7:
-        return const WellnessGoalsStep();
+        return const HabitsStep();
       case 8:
+        return const WellnessGoalsStep();
+      case 9:
         return const LifeSatisfactionStep();
       default:
         return _buildPlaceholderStep(step);
@@ -184,8 +191,56 @@ class StepContent extends StatelessWidget {
   }
 
   bool _hasSubtitle(int step) {
-    return ![2].contains(
+    return ![2, 5, 6].contains(
       step,
-    ); // Age step doesn't need subtitle since it's visually clear
+    ); // Age step, stress level step, and mood analysis permission step don't need subtitles
+  }
+
+  Widget _MoodAnalysisPermissionStep() {
+    return Builder(
+      builder: (context) {
+        // Auto-show the popup when this step is displayed
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          showDialog<bool>(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => MoodAnalysisPermissionPopup(
+              onYes: () {
+                Navigator.of(context).pop(true);
+                // Handle the result here - you might want to pass callbacks to parent
+                print('Mood analysis permission: true');
+              },
+              onNo: () {
+                Navigator.of(context).pop(false);
+                // Handle the result here - you might want to pass callbacks to parent
+                print('Mood analysis permission: false');
+              },
+            ),
+          );
+        });
+
+        // Return a placeholder that will be covered by the popup
+        return Container(
+          constraints: const BoxConstraints(maxWidth: 600),
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            children: [
+              Icon(
+                Icons.psychology_outlined,
+                size: 60,
+                color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Preparing mood analysis...',
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }
