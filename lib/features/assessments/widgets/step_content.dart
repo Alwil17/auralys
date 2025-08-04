@@ -219,13 +219,13 @@ class _StepContentState extends State<StepContent> {
             barrierDismissible: false,
             builder: (context) => MoodAnalysisPermissionPopup(
               onYes: () {
-                Navigator.of(context).pop(); // Close the dialog
+                //Navigator.of(context).pop(); // Close the dialog
                 // Proceed to next step
                 widget.onNextStep?.call();
                 debugPrint('Mood analysis permission: true - proceeding to next step');
               },
               onNo: () {
-                Navigator.of(context).pop(); // Close the dialog
+                //Navigator.of(context).pop(); // Close the dialog
                 // Proceed to next step (user declined but we still continue)
                 widget.onNextStep?.call();
                 debugPrint('Mood analysis permission: false - proceeding to next step');
