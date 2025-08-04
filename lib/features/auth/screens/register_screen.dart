@@ -1,7 +1,8 @@
 import 'package:auralys/features/auth/widgets/circle_header.dart';
 import 'package:auralys/features/auth/widgets/input_field.dart';
-import 'package:auralys/features/auth/widgets/logo_widget.dart';
 import 'package:auralys/features/auth/widgets/primary_button.dart';
+import 'package:auralys/shared/app_assets.dart';
+import 'package:auralys/shared/image_with_loader.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -27,7 +28,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
             child: Column(
               children: [
-                const LogoWidget(),
+                const SizedBox(height: 80),
+
+                const ImageWithLoader(
+                    width: 50,
+                    height: 50,
+                    imagePath: AppAssets.logo,
+                    radius: 30,
+                  ),
 
                 Expanded(
                   child: Container(
