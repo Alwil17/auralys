@@ -69,7 +69,7 @@ class _NameStepState extends State<NameStep> {
             onSubmitted: (value) {
               if (value.trim().isNotEmpty) {
                 // Handle name submission
-                print('User name: ${value.trim()}');
+                debugPrint('User name: ${value.trim()}');
               }
             },
           ),
