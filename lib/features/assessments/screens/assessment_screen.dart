@@ -79,7 +79,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                     child: OutlinedButton(
                       onPressed: () => _goToNextStep(),
                       style: OutlinedButton.styleFrom(
-                        backgroundColor: theme.colorScheme.secondary.withOpacity(0.1),
+                        backgroundColor: theme.colorScheme.secondary.withValues(alpha: 0.1),
                         side: BorderSide(color: theme.colorScheme.secondary),
                         padding: const EdgeInsets.symmetric(
                           vertical: 14,
