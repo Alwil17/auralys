@@ -202,13 +202,13 @@ class StepContent extends StatelessWidget {
                 Navigator.of(context).pop(); // Close the dialog
                 // Proceed to next step
                 onNextStep?.call();
-                print('Mood analysis permission: true - proceeding to next step');
+                debugPrint('Mood analysis permission: true - proceeding to next step');
               },
               onNo: () {
                 Navigator.of(context).pop(); // Close the dialog
                 // Proceed to next step (user declined but we still continue)
                 onNextStep?.call();
-                print('Mood analysis permission: false - proceeding to next step');
+                debugPrint('Mood analysis permission: false - proceeding to next step');
               },
             ),
           );
