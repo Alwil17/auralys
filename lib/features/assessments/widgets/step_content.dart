@@ -95,7 +95,7 @@ class StepContent extends StatelessWidget {
       case 4:
         return 'Understanding your sleep patterns helps us provide better guidance for your wellness journey.';
       case 5:
-        return 'Rate your current stress level on a scale from 1 to 5.';
+        return '';
       case 6:
         return 'Tell us about your daily routines and activities that support your well-being.';
       case 7:
@@ -118,7 +118,7 @@ class StepContent extends StatelessWidget {
       case 4:
         return 'Sleep & Wellness';
       case 5:
-        return 'Stress Level';
+        return 'How would you rate your stress level?';
       case 6:
         return 'Your Daily Habits';
       case 7:
