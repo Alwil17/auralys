@@ -74,7 +74,7 @@ class _WellnessGoalsStepState extends State<WellnessGoalsStep> {
           Text(
             'What are your main wellness goals? (Select up to 3)',
             style: theme.textTheme.bodyMedium?.copyWith(
-              color: theme.colorScheme.onSurface.withOpacity(0.7),
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
               fontSize: 14,
             ),
             textAlign: TextAlign.center,
@@ -107,13 +107,13 @@ class _WellnessGoalsStepState extends State<WellnessGoalsStep> {
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       color: goal.isSelected
-                          ? goal.color.withOpacity(0.1)
+                          ? goal.color.withValues(alpha: 0.1)
                           : theme.colorScheme.surface,
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
                         color: goal.isSelected
                             ? goal.color
-                            : theme.colorScheme.outline.withOpacity(0.3),
+                            : theme.colorScheme.outline.withValues(alpha: 0.3),
                         width: goal.isSelected ? 2 : 1,
                       ),
                     ),
@@ -125,7 +125,7 @@ class _WellnessGoalsStepState extends State<WellnessGoalsStep> {
                           height: 48,
                           decoration: BoxDecoration(
                             color: goal.isSelected
-                                ? goal.color.withOpacity(0.2)
+                                ? goal.color.withValues(alpha: 0.2)
                                 : theme.colorScheme.surfaceContainerHighest,
                             shape: BoxShape.circle,
                           ),
@@ -158,7 +158,7 @@ class _WellnessGoalsStepState extends State<WellnessGoalsStep> {
                               Text(
                                 goal.description,
                                 style: theme.textTheme.bodyMedium?.copyWith(
-                                  color: theme.colorScheme.onSurface.withOpacity(0.7),
+                                  color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
                                   fontSize: 13,
                                 ),
                               ),
@@ -195,10 +195,10 @@ class _WellnessGoalsStepState extends State<WellnessGoalsStep> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             decoration: BoxDecoration(
-              color: theme.colorScheme.primaryContainer.withOpacity(0.1),
+              color: theme.colorScheme.primaryContainer.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
-                color: theme.colorScheme.primary.withOpacity(0.2),
+                color: theme.colorScheme.primary.withValues(alpha: 0.2),
               ),
             ),
             child: Text(
