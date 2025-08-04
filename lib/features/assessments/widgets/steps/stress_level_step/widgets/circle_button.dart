@@ -1,57 +1,49 @@
 import 'package:flutter/material.dart';
 
 class CircleButton extends StatelessWidget {
-  final String text;
+  final ThemeData theme;
   
+  final String text;
   final bool isSelected;
-  final VoidCallback onTap;
+  final void Function() onTap;
   const CircleButton({
     super.key,
+    required this.theme,
     required this.text,
     required this.isSelected,
     required this.onTap,
   });
-
+  
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    
-    return GestureDetector(
+    return InkWell(
+      borderRadius: BorderRadius.circular(40),
       onTap: onTap,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
+      child: Container(
         width: 65,
         height: 65,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: isSelected
               ? theme.colorScheme.primary
-              : theme.colorScheme.surface,
+              : theme.colorScheme.primaryContainer,
           border: Border.all(
             color: isSelected
                 ? theme.colorScheme.primary
-                : theme.colorScheme.outline.withOpacity(0.3),
-            width: isSelected ? 3 : 2,
+                : theme.colorScheme.primaryContainer,
+            width: 4,
           ),
-          boxShadow: isSelected
-              ? [
-                  BoxShadow(
-                    color: theme.colorScheme.primary.withOpacity(0.3),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
-                  ),
-                ]
-              : null,
         ),
-        child: Center(
-          child: Text(
-            text,
-            style: theme.textTheme.titleLarge?.copyWith(
-              fontSize: 24,
-              fontWeight: FontWeight.w800,
-              color: isSelected 
-                  ? Colors.white 
-                  : theme.colorScheme.onSurface,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: Text(
+              text,
+              style: theme.textTheme.titleLarge?.copyWith(
+                fontSize: 26,
+                fontWeight: FontWeight.w800,
+                color: isSelected ? Colors.white : theme.colorScheme.onSurface,
+              ),
             ),
           ),
         ),
