@@ -48,7 +48,7 @@ class _MoodWheelWidgetState extends State<MoodWheelWidget> {
           height: 120,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: _moodColors[_selectedIndex].withOpacity(0.1),
+            color: _moodColors[_selectedIndex].withValues(alpha: 0.1),
           ),
           child: Center(
             child: Text(
