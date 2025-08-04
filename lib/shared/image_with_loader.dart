@@ -1,4 +1,4 @@
-// Widget pour le logo avec loader
+// Widget for image with loader
 import 'package:flutter/material.dart';
 
 class ImageWithLoader extends StatefulWidget {
@@ -34,7 +34,7 @@ class _ImageWithLoaderState extends State<ImageWithLoader> {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            // Image avec cache et gestion d'erreur
+            // Image with cache and error handling
             ClipRRect(
               borderRadius: BorderRadius.circular(widget.radius),
               child: Image.asset(
@@ -42,11 +42,11 @@ class _ImageWithLoaderState extends State<ImageWithLoader> {
                 width: widget.width,
                 height: widget.height,
                 fit: widget.fit,
-                cacheWidth: widget.width.toInt(), // Cache optimisé
+                cacheWidth: widget.width.toInt(), // Optimized caching
                 cacheHeight: widget.height.toInt(),
                 frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
                   if (wasSynchronouslyLoaded || frame != null) {
-                    // Image chargée avec succès
+                    // Image loaded successfully
                     WidgetsBinding.instance.addPostFrameCallback((_) {
                       if (mounted && !_imageLoaded) {
                         setState(() => _imageLoaded = true);
@@ -54,7 +54,7 @@ class _ImageWithLoaderState extends State<ImageWithLoader> {
                     });
                     return child;
                   }
-                  return const SizedBox.shrink(); // Pas encore chargée
+                  return const SizedBox.shrink(); // Not loaded yet
                 },
                 errorBuilder: (context, error, stackTrace) {
                   WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -74,7 +74,7 @@ class _ImageWithLoaderState extends State<ImageWithLoader> {
               ),
             ),
 
-            // Loader seulement si image pas encore chargée
+            // Loader only if image is not loaded and no error
             if (!_imageLoaded && !_hasError)
               const CircularProgressIndicator(strokeWidth: 2),
           ],
