@@ -77,7 +77,7 @@ class StepContent extends StatelessWidget {
       constraints: const BoxConstraints(maxWidth: 600),
       height: 200,
       decoration: BoxDecoration(
-        color: Colors.grey.withOpacity(0.1),
+        color: Colors.grey.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Center(
@@ -223,13 +223,13 @@ class StepContent extends StatelessWidget {
               Icon(
                 Icons.psychology_outlined,
                 size: 60,
-                color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
+                color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.5),
               ),
               const SizedBox(height: 16),
               Text(
                 'Preparing mood analysis...',
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
                 ),
               ),
             ],
