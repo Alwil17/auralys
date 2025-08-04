@@ -1,10 +1,10 @@
 import 'package:auralys/core/router/routes.dart';
 import 'package:auralys/core/theme/app_theme.dart';
-import 'package:auralys/features/onboarding/widgets/image_with_loader.dart';
 import 'package:auralys/l10n/app_localizations.dart';
 import 'package:auralys/shared/app_assets.dart';
 import 'package:auralys/shared/app_colors.dart';
 import 'package:auralys/shared/app_sizes.dart';
+import 'package:auralys/shared/image_with_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -29,6 +29,7 @@ class WelcomeScreen extends StatelessWidget {
                     width: 64,
                     height: 64,
                     imagePath: AppAssets.logo,
+                    radius: 30,
                   ),
 
                   // Welcome text
@@ -59,6 +60,7 @@ class WelcomeScreen extends StatelessWidget {
                     width: 300,
                     height: 300,
                     imagePath: AppAssets.luma,
+                    radius: 150,
                   ),
 
                   // Get Started button
