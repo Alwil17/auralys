@@ -1,10 +1,11 @@
 import 'package:auralys/core/router/routes.dart';
 import 'package:auralys/features/auth/widgets/circle_header.dart';
 import 'package:auralys/features/auth/widgets/input_field.dart';
-import 'package:auralys/features/auth/widgets/logo_widget.dart';
 import 'package:auralys/features/auth/widgets/primary_button.dart';
 import 'package:auralys/features/auth/widgets/social_login_row.dart';
+import 'package:auralys/shared/app_assets.dart';
 import 'package:auralys/shared/app_sizes.dart';
+import 'package:auralys/shared/image_with_loader.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -23,12 +24,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final TapGestureRecognizer _signUpRecognizer = TapGestureRecognizer();
 
   @override
-  void initState() {
-    super.initState();
-    _signUpRecognizer.onTap = _handleSignUp;
-  }
-
-  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
@@ -40,7 +35,14 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
             child: Column(
               children: [
-                const LogoWidget(),
+                const SizedBox(height: 80),
+
+                const ImageWithLoader(
+                  width: 50,
+                  height: 50,
+                  imagePath: AppAssets.logo,
+                  radius: 30,
+                ),
 
                 const SizedBox(height: AppSizes.font48),
 
@@ -134,6 +136,12 @@ class _LoginScreenState extends State<LoginScreen> {
     _passwordController.dispose();
     _signUpRecognizer.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _signUpRecognizer.onTap = _handleSignUp;
   }
 
   void _handleForgotPassword() {
