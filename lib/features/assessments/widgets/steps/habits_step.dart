@@ -76,7 +76,7 @@ class _HabitsStepState extends State<HabitsStep> {
           Text(
             'Select activities you do regularly (tap all that apply)',
             style: theme.textTheme.bodyMedium?.copyWith(
-              color: theme.colorScheme.onSurface.withOpacity(0.7),
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
               fontSize: 14,
             ),
             textAlign: TextAlign.center,
@@ -114,7 +114,7 @@ class _HabitsStepState extends State<HabitsStep> {
                     border: Border.all(
                       color: habit.isSelected
                           ? theme.colorScheme.primary
-                          : theme.colorScheme.outline.withOpacity(0.3),
+                          : theme.colorScheme.outline.withValues(alpha: 0.3),
                       width: habit.isSelected ? 2 : 1,
                     ),
                   ),
@@ -129,7 +129,7 @@ class _HabitsStepState extends State<HabitsStep> {
                             size: 20,
                             color: habit.isSelected
                                 ? theme.colorScheme.primary
-                                : theme.colorScheme.onSurface.withOpacity(0.6),
+                                : theme.colorScheme.onSurface.withValues(alpha: 0.6),
                           ),
                           const SizedBox(width: 8),
                           Expanded(
@@ -153,8 +153,8 @@ class _HabitsStepState extends State<HabitsStep> {
                         habit.description,
                         style: theme.textTheme.bodySmall?.copyWith(
                           color: habit.isSelected
-                              ? theme.colorScheme.onPrimaryContainer.withOpacity(0.8)
-                              : theme.colorScheme.onSurface.withOpacity(0.6),
+                              ? theme.colorScheme.onPrimaryContainer.withValues(alpha: 0.8)
+                              : theme.colorScheme.onSurface.withValues(alpha: 0.6),
                           fontSize: 11,
                         ),
                         maxLines: 2,
@@ -173,10 +173,10 @@ class _HabitsStepState extends State<HabitsStep> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             decoration: BoxDecoration(
-              color: theme.colorScheme.primaryContainer.withOpacity(0.1),
+              color: theme.colorScheme.primaryContainer.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
-                color: theme.colorScheme.primary.withOpacity(0.2),
+                color: theme.colorScheme.primary.withValues(alpha: 0.2),
               ),
             ),
             child: Text(
