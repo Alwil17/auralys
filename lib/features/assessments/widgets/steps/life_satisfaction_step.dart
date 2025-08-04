@@ -28,7 +28,7 @@ class _LifeSatisfactionStepState extends State<LifeSatisfactionStep> {
           Text(
             'Rate your satisfaction in different areas of life',
             style: theme.textTheme.bodyMedium?.copyWith(
-              color: theme.colorScheme.onSurface.withOpacity(0.7),
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
               fontSize: 14,
             ),
             textAlign: TextAlign.center,
@@ -40,10 +40,10 @@ class _LifeSatisfactionStepState extends State<LifeSatisfactionStep> {
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: theme.colorScheme.primaryContainer.withOpacity(0.1),
+              color: theme.colorScheme.primaryContainer.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
-                color: theme.colorScheme.primary.withOpacity(0.2),
+                color: theme.colorScheme.primary.withValues(alpha: 0.2),
               ),
             ),
             child: Column(
@@ -67,9 +67,9 @@ class _LifeSatisfactionStepState extends State<LifeSatisfactionStep> {
                 SliderTheme(
                   data: SliderThemeData(
                     activeTrackColor: theme.colorScheme.primary,
-                    inactiveTrackColor: theme.colorScheme.primary.withOpacity(0.2),
+                    inactiveTrackColor: theme.colorScheme.primary.withValues(alpha: 0.2),
                     thumbColor: theme.colorScheme.primary,
-                    overlayColor: theme.colorScheme.primary.withOpacity(0.1),
+                    overlayColor: theme.colorScheme.primary.withValues(alpha: 0.1),
                     valueIndicatorColor: theme.colorScheme.primary,
                   ),
                   child: Slider(
@@ -90,7 +90,7 @@ class _LifeSatisfactionStepState extends State<LifeSatisfactionStep> {
                     Text(
                       'Very Poor',
                       style: theme.textTheme.bodySmall?.copyWith(
-                        color: theme.colorScheme.onSurface.withOpacity(0.6),
+                        color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
                       ),
                     ),
                     Text(
@@ -103,7 +103,7 @@ class _LifeSatisfactionStepState extends State<LifeSatisfactionStep> {
                     Text(
                       'Excellent',
                       style: theme.textTheme.bodySmall?.copyWith(
-                        color: theme.colorScheme.onSurface.withOpacity(0.6),
+                        color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
                       ),
                     ),
                   ],
@@ -139,7 +139,7 @@ class _LifeSatisfactionStepState extends State<LifeSatisfactionStep> {
                   color: theme.colorScheme.surface,
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: theme.colorScheme.outline.withOpacity(0.2),
+                    color: theme.colorScheme.outline.withValues(alpha: 0.2),
                   ),
                 ),
                 child: Column(
@@ -168,9 +168,9 @@ class _LifeSatisfactionStepState extends State<LifeSatisfactionStep> {
                       data: SliderThemeData(
                         trackHeight: 6,
                         activeTrackColor: _getCategoryColor(category),
-                        inactiveTrackColor: _getCategoryColor(category).withOpacity(0.2),
+                        inactiveTrackColor: _getCategoryColor(category).withValues(alpha: 0.2),
                         thumbColor: _getCategoryColor(category),
-                        overlayColor: _getCategoryColor(category).withOpacity(0.1),
+                        overlayColor: _getCategoryColor(category).withValues(alpha: 0.1),
                         thumbShape: const RoundSliderThumbShape(
                           enabledThumbRadius: 10,
                         ),
@@ -199,7 +199,7 @@ class _LifeSatisfactionStepState extends State<LifeSatisfactionStep> {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: theme.colorScheme.secondaryContainer.withOpacity(0.3),
+              color: theme.colorScheme.secondaryContainer.withValues(alpha: 0.3),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Row(
