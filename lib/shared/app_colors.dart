@@ -26,7 +26,7 @@ class _LightColors {
   Color get background => const Color(0xFFFFFAF4);
   Color get onBackground => const Color(0xFF4F3422);
   Color get onPrimaryContainer => const Color(0xFF736B66);
-  Color get primary => const Color(0xFF4F3422);
+  Color get primary => const Color(0xFF232D5C);
   Color get primaryContainer => const Color(0xFFFFFFFF);
   Color get purple => const Color(0xFFE876DB);
   Color get secondary => const Color(0xFF9db068);

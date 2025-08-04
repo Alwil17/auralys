@@ -13,7 +13,7 @@ class AssessmentScreen extends StatefulWidget {
 }
 
 class _AssessmentScreenState extends State<AssessmentScreen> {
-  static const int _totalSteps = 6;
+  static const int _totalSteps = 10; // Updated to include all steps including popup and name step
   final PageController _pageController = PageController();
   int _currentStep = 1;
 
@@ -59,7 +59,11 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
           physics: const NeverScrollableScrollPhysics(),
           itemCount: _totalSteps,
           itemBuilder: (context, index) {
-            return StepContent(stepIndex: index + 1);
+            return StepContent(
+              stepIndex: index + 1,
+              onNextStep: _goToNextStep,
+              onPreviousStep: _goToPreviousStep,
+            );
           },
         ),
         bottomNavigationBar: SafeArea(
@@ -75,7 +79,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                     child: OutlinedButton(
                       onPressed: () => _goToNextStep(),
                       style: OutlinedButton.styleFrom(
-                        backgroundColor: theme.colorScheme.secondary.withOpacity(0.1),
+                        backgroundColor: theme.colorScheme.secondary.withValues(alpha: 0.1),
                         side: BorderSide(color: theme.colorScheme.secondary),
                         padding: const EdgeInsets.symmetric(
                           vertical: 14,
@@ -114,7 +118,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                 PrimaryButton(
                   text: _currentStep == _totalSteps 
                       ? 'Complete Assessment' 
-                      : 'Continue →',
+                      : 'Continue',
                   onPressed: _handleContinue,
                   margin: EdgeInsets.zero,
                 ),
@@ -173,19 +177,6 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
     if (_currentStep > 1) {
       setState(() {
         _currentStep--;
-      });
-      _pageController.animateToPage(
-        _currentStep - 1,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
-    }
-  }
-
-  void _goToStep(int step) {
-    if (step >= 1 && step <= _totalSteps) {
-      setState(() {
-        _currentStep = step;
       });
       _pageController.animateToPage(
         _currentStep - 1,

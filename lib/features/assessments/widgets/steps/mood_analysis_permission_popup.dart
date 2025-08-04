@@ -1,20 +1,27 @@
 import 'package:auralys/shared/app_assets.dart';
 import 'package:flutter/material.dart';
 
-class ForgotPasswordPopup extends StatefulWidget {
-  const ForgotPasswordPopup({super.key});
+class MoodAnalysisPermissionPopup extends StatefulWidget {
+  final VoidCallback? onYes;
+  final VoidCallback? onNo;
+
+  const MoodAnalysisPermissionPopup({
+    super.key,
+    this.onYes,
+    this.onNo,
+  });
 
   @override
-  State<ForgotPasswordPopup> createState() => _ForgotPasswordPopupState();
+  State<MoodAnalysisPermissionPopup> createState() => _MoodAnalysisPermissionPopupState();
 }
 
-class _ForgotPasswordPopupState extends State<ForgotPasswordPopup> {
+class _MoodAnalysisPermissionPopupState extends State<MoodAnalysisPermissionPopup> {
   bool _imageLoaded = false;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
+    
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
@@ -29,6 +36,7 @@ class _ForgotPasswordPopupState extends State<ForgotPasswordPopup> {
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                // Image instead of icon
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.6,
                   height: 200,
@@ -56,7 +64,7 @@ class _ForgotPasswordPopupState extends State<ForgotPasswordPopup> {
                         opacity: _imageLoaded ? 1.0 : 0.0,
                         duration: const Duration(milliseconds: 300),
                         child: Image.asset(
-                          AppAssets.forgotPassword,
+                          AppAssets.consent,
                           width: MediaQuery.of(context).size.width * 0.6,
                           height: 200,
                           fit: BoxFit.contain,
@@ -72,7 +80,7 @@ class _ForgotPasswordPopupState extends State<ForgotPasswordPopup> {
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Icon(
-                                Icons.email_outlined,
+                                Icons.psychology_outlined,
                                 color: theme.colorScheme.primary,
                                 size: 80,
                               ),
@@ -92,8 +100,10 @@ class _ForgotPasswordPopupState extends State<ForgotPasswordPopup> {
                   ),
                 ),
                 const SizedBox(height: 24),
+                
+                // Title/Question
                 const Text(
-                  'Password Reset Email Sent',
+                  'Can I analyze your mood to personalize your experience?',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
@@ -101,41 +111,75 @@ class _ForgotPasswordPopupState extends State<ForgotPasswordPopup> {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 16),
-                const Text(
-                  'We have sent you a password reset email. Please check your inbox and follow the instructions.',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Color(0xFF666666),
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 24),
-                ElevatedButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: theme.colorScheme.primary,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 14,
-                      horizontal: 32,
+                
+                const SizedBox(height: 32),
+                
+                // Buttons
+                Row(
+                  children: [
+                    // No thanks button
+                    Expanded(
+                      child: OutlinedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          widget.onNo?.call();
+                        },
+                        style: OutlinedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(28),
+                          ),
+                          side: BorderSide(
+                            color: theme.colorScheme.outline,
+                          ),
+                        ),
+                        child: const Text(
+                          'No thanks',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFF666666),
+                          ),
+                        ),
+                      ),
                     ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(28),
+                    
+                    const SizedBox(width: 12),
+                    
+                    // Yes, I'm okay button
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          widget.onYes?.call();
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: theme.colorScheme.primary,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 14,
+                            horizontal: 25,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(28),
+                          ),
+                        ),
+                        child: const Text(
+                          "Yes, I'm okay",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                  child: const Text(
-                    'Got it',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
+                  ],
                 ),
               ],
             ),
           ),
         ),
+        // Close button at the bottom
         Positioned(
           bottom: 16,
           child: GestureDetector(
@@ -162,6 +206,18 @@ class _ForgotPasswordPopupState extends State<ForgotPasswordPopup> {
           ),
         ),
       ],
+    );
+  }
+
+  // Static method to show the popup
+  static Future<bool?> show(BuildContext context) {
+    return showDialog<bool>(
+      context: context,
+      barrierDismissible: false, // User must choose an option
+      builder: (context) => MoodAnalysisPermissionPopup(
+        onYes: () => Navigator.of(context).pop(true),
+        onNo: () => Navigator.of(context).pop(false),
+      ),
     );
   }
 }

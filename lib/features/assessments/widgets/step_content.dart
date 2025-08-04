@@ -1,12 +1,30 @@
 import 'package:auralys/features/assessments/widgets/steps/age_step.dart';
 import 'package:auralys/features/assessments/widgets/steps/gender_step.dart';
+import 'package:auralys/features/assessments/widgets/steps/mood_analysis_permission_popup.dart';
 import 'package:auralys/features/assessments/widgets/steps/mood_step.dart';
+import 'package:auralys/features/assessments/widgets/steps/name_step.dart';
+import 'package:auralys/features/assessments/widgets/steps/sleep_step.dart';
+import 'package:auralys/features/assessments/widgets/steps/stress_level_step.dart';
 import 'package:flutter/material.dart';
 
-class StepContent extends StatelessWidget {
+class StepContent extends StatefulWidget {
   final int stepIndex;
+  final VoidCallback? onNextStep;
+  final VoidCallback? onPreviousStep;
 
-  const StepContent({super.key, required this.stepIndex});
+  const StepContent({
+    super.key, 
+    required this.stepIndex, 
+    this.onNextStep,
+    this.onPreviousStep,
+  });
+
+  @override
+  State<StepContent> createState() => _StepContentState();
+}
+
+class _StepContentState extends State<StepContent> {
+  bool _popupShown = false;
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +37,12 @@ class StepContent extends StatelessWidget {
           child: Column(
             children: [
               // Only show title and subtitle for non-special layout steps
-              if (![2].contains(stepIndex)) ...[
+              if (![2].contains(widget.stepIndex)) ...[
                 ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 600),
                   child: Text(
                     textAlign: TextAlign.center,
-                    _getStepTitle(stepIndex),
+                    _getStepTitle(widget.stepIndex),
                     style: theme.textTheme.titleLarge?.copyWith(
                       fontSize: 28,
                       fontWeight: FontWeight.w800,
@@ -32,13 +50,13 @@ class StepContent extends StatelessWidget {
                   ),
                 ),
 
-                if (_hasSubtitle(stepIndex)) ...[
+                if (_hasSubtitle(widget.stepIndex)) ...[
                   const SizedBox(height: 16),
                   ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 600),
                     child: Text(
                       textAlign: TextAlign.center,
-                      _getStepSubtitle(stepIndex),
+                      _getStepSubtitle(widget.stepIndex),
                       style: theme.textTheme.titleMedium?.copyWith(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
@@ -51,7 +69,7 @@ class StepContent extends StatelessWidget {
                 const SizedBox(height: 40),
               ],
 
-              _getStepWidget(context, stepIndex),
+              _getStepWidget(context, widget.stepIndex),
 
               const SizedBox(height: 40),
             ],
@@ -61,104 +79,13 @@ class StepContent extends StatelessWidget {
     );
   }
 
-  Widget _buildFinalStep() {
-    return Container(
-      constraints: const BoxConstraints(maxWidth: 600),
-      child: Column(
-        children: [
-          // Placeholder for final questions
-          Container(
-            height: 220,
-            decoration: BoxDecoration(
-              color: Colors.grey.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: const Center(
-              child: Text(
-                'Final Questions\n(Goals, Preferences, etc.)',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, color: Colors.grey),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildHabitsStep() {
-    return Container(
-      constraints: const BoxConstraints(maxWidth: 600),
-      child: Column(
-        children: [
-          // Placeholder for habits questionnaire
-          Container(
-            height: 300,
-            decoration: BoxDecoration(
-              color: Colors.grey.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: const Center(
-              child: Text(
-                'Daily Habits Questionnaire\n(Exercise, Social activities, etc.)',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, color: Colors.grey),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildMoodStep() {
-    return Container(
-      constraints: const BoxConstraints(maxWidth: 600),
-      child: Column(
-        children: [
-          // Placeholder for mood selection
-          Container(
-            height: 250,
-            decoration: BoxDecoration(
-              color: Colors.grey.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: const Center(
-              child: Text(
-                'Mood Selection\n(Emoji wheel or mood cards)',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, color: Colors.grey),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPersonalInfoStep() {
-    return Container(
-      constraints: const BoxConstraints(maxWidth: 600),
-      child: Column(
-        children: [
-          // Placeholder for personal info form
-          Container(
-            height: 200,
-            decoration: BoxDecoration(
-              color: Colors.grey.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: const Center(
-              child: Text(
-                'Personal Information Form\n(Gender, etc.)',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, color: Colors.grey),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+  @override
+  void didUpdateWidget(StepContent oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Reset popup flag when step changes
+    if (oldWidget.stepIndex != widget.stepIndex) {
+      _popupShown = false;
+    }
   }
 
   Widget _buildPlaceholderStep(int step) {
@@ -166,7 +93,7 @@ class StepContent extends StatelessWidget {
       constraints: const BoxConstraints(maxWidth: 600),
       height: 200,
       decoration: BoxDecoration(
-        color: Colors.grey.withOpacity(0.1),
+        color: Colors.grey.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Center(
@@ -175,31 +102,6 @@ class StepContent extends StatelessWidget {
           textAlign: TextAlign.center,
           style: const TextStyle(fontSize: 16, color: Colors.grey),
         ),
-      ),
-    );
-  }
-
-  Widget _buildSleepStep() {
-    return Container(
-      constraints: const BoxConstraints(maxWidth: 600),
-      child: Column(
-        children: [
-          // Placeholder for sleep assessment
-          Container(
-            height: 280,
-            decoration: BoxDecoration(
-              color: Colors.grey.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: const Center(
-              child: Text(
-                'Sleep Assessment\n(Hours, Quality, Patterns)',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, color: Colors.grey),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -213,11 +115,13 @@ class StepContent extends StatelessWidget {
       case 3:
         return 'Select the emoji that best represents your current mood.';
       case 4:
-        return 'Tell us about your daily routines and activities.';
+        return 'Understanding your sleep patterns helps us provide better guidance for your wellness journey.';
       case 5:
-        return 'Understanding your sleep patterns helps us provide better guidance.';
+        return '';
       case 6:
-        return 'Just a few more questions to complete your profile.';
+        return ''; // This is a popup, no subtitle needed
+      case 7:
+        return 'Please, tell me your name !!! How should I call you ?';
       default:
         return '';
     }
@@ -232,11 +136,13 @@ class StepContent extends StatelessWidget {
       case 3:
         return 'How are you feeling today?';
       case 4:
-        return 'Your Daily Habits';
-      case 5:
         return 'Sleep & Wellness';
+      case 5:
+        return 'How would you rate your stress level?';
       case 6:
-        return 'Final Questions';
+        return 'Mood Analysis Permission'; // This will be covered by popup
+      case 7:
+        return 'Want to know you !';
       default:
         return 'Assessment Step $step';
     }
@@ -281,17 +187,75 @@ class StepContent extends StatelessWidget {
       case 3:
         return const MoodStep();
       case 4:
-        return _buildHabitsStep();
+        return const SleepStep();
       case 5:
-        return _buildSleepStep();
+        return const StressLevelStep();
       case 6:
-        return _buildFinalStep();
+        return _MoodAnalysisPermissionStep();
+      case 7:
+        return const NameStep();
       default:
         return _buildPlaceholderStep(step);
     }
   }
 
   bool _hasSubtitle(int step) {
-    return ![2].contains(step); // Age step doesn't need subtitle since it's visually clear
+    return ![2, 5, 6].contains(
+      step,
+    ); // Age step, stress level step, and mood analysis permission step don't need subtitles
+  }
+
+  Widget _MoodAnalysisPermissionStep() {
+    // Montrer le popup seulement si il n'a pas déjà été montré
+    if (!_popupShown) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted && !_popupShown) {
+          setState(() {
+            _popupShown = true;
+          });
+          
+          showDialog<bool>(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => MoodAnalysisPermissionPopup(
+              onYes: () {
+                Navigator.of(context).pop(); // Close the dialog
+                // Proceed to next step
+                widget.onNextStep?.call();
+                debugPrint('Mood analysis permission: true - proceeding to next step');
+              },
+              onNo: () {
+                Navigator.of(context).pop(); // Close the dialog
+                // Proceed to next step (user declined but we still continue)
+                widget.onNextStep?.call();
+                debugPrint('Mood analysis permission: false - proceeding to next step');
+              },
+            ),
+          );
+        }
+      });
+    }
+
+    // Return a placeholder that will be covered by the popup
+    return Container(
+      constraints: const BoxConstraints(maxWidth: 600),
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        children: [
+          Icon(
+            Icons.psychology_outlined,
+            size: 60,
+            color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.5),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Preparing mood analysis...',
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
